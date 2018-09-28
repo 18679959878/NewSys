@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.FinalProjectTitelMapper">
+	<resultMap type="com.sys.entity.FinalProjectTitel" id="FinalProjectTitelResult">
+		<id column="stuId" jdbcType="VARCHAR" property="stuId"></id>
+		<result column="titel_cn" jdbcType="VARCHAR" property="titelCn" />
+		<result column="titel_en" jdbcType="VARCHAR" property="titelEn" />
+		<result column="academy" jdbcType="VARCHAR" property="academy" />
+		<result column="teaNameAndTitel" jdbcType="VARCHAR" property="teaNameAndTitel" />
+		<result column="score" jdbcType="INTEGER" property="score" />
+		<result column="isSumbit" jdbcType="TINYINT" property="isSumbit" />
+	</resultMap>
+	<select id="select" parameterType="String" resultMap="FinalProjectTitelResult">
+		SELECT
+		stuId,titel_cn,titel_en,academy,teaNameAndTitel,score,isSumbit FROM
+		finalProjectTitel WHERE stuId= #{stuId}
+	</select>
+	<insert id="saveOrUpdate" parameterType="com.sys.entity.FinalProjectTitel">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			SELECT COUNT(*) FROM finalProjectTitel WHERE stuId = #{stuId}
+		</selectKey>
+		<if test="count > 0">
+			UPDATE finalProjectTitel
+			SET titel_cn = #{titelCn},titel_en =
+			#{titelEn},academy=#{academy},teaNameAndTitel=#{teaNameAndTitel},score=#{score},isSumbit=#{isSumbit}
+			where stuId = #{stuId}
+		</if>
+		<if test="count==0">
+			insert into
+			finalProjectTitel(stuId,titel_cn,titel_en,academy,teaNameAndTitel,score,isSumbit)
+			values(#{stuId},#{titelCn},#{titelEn},#{academy},#{teaNameAndTitel},#{score},#{isSumbit})
+		</if>
+
+	</insert>
+</mapper>

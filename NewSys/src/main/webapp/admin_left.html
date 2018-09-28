@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>后台管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-13" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_left.html">
+	<!--      左侧菜单     -->
+	<div id="sidebar" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-13" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_left.html">
+		<ul>
+			<li><a><img src="images/layout.png" alt="">信息管理</a>
+				<ul>
+					<!-- <li><a href="pinpai/pinpai.html">品牌管理</a></li> -->
+					<li><a href="admin_class_ma.html" target="right">班级信息</a></li>
+					<li><a href="admin_curriculum_ma.html" target="right">课程信息</a></li>
+					<li><a href="admin_teacher_ma.html" target="right">教师信息</a></li>
+
+				</ul></li>
+
+			<li><a><img src="images/brush.png" alt="">毕业设计管理</a>
+				<ul>
+					<li><a href="admin_paper_ma.html" target="right">时间阶段设置</a></li>
+					<li><a href="information/promotion.html" target="right">指导教师设置</a></li>
+					<li><a href="information/promotion.html" target="right">提交详情</a></li>
+				</ul></li>
+			<li><a><img src="images/huser.png" alt=""> 实习管理</a>
+				<ul>
+					<li><a href="admin_works_ma.html" target="right">时间阶段设置</a></li>
+					<li><a href="information/promotion.html" target="right">指导教师设置</a></li>
+					<li><a href="information/promotion.html" target="right">提交详情</a></li>
+				</ul></li>
+
+
+			<li><a href="javascript:void(0);" onclick="exit()"><img
+					src="images/huser.png" alt="">退出系统</a>
+				<ul>
+				</ul></li>
+
+		</ul>
+	</div>
+</body>
+<script type="text/javascript">
+	function exit() {
+		top.location = "/NewSys/login.html";
+	}
+</script>
+</html>

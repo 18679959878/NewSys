@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.DateStageMapper">
+	<resultMap type="com.sys.entity.DateStage" id="DateStageResult">
+		<id column="stageName" jdbcType="VARCHAR" property="stageName"></id>
+		<id column="grade" jdbcType="VARCHAR" property="grade"></id>
+		<id column="education" jdbcType="VARCHAR" property="education"></id>
+		<id column="type" jdbcType="VARCHAR" property="type"></id>
+		<result column="startDate" jdbcType="DATE" property="startDate"
+			javaType="java.util.Date"></result>
+		<result column="endDate" jdbcType="DATE" property="endDate"
+			javaType="java.util.Date"></result>
+	</resultMap>
+	<insert id="save" parameterType="com.sys.entity.DateStage">
+		INSERT INTO
+		DateStage(stageName,grade,education,startDate,endDate,type)
+		VALUES(#{stageName},#{grade},#{education},#{startDate,
+		jdbcType=DATE},#{endDate,
+		jdbcType=DATE},#{type})
+	</insert>
+	<select id="selectPage" resultMap="DateStageResult">
+		SELECT
+		stageName,grade,education,startDate,endDate FROM DateStage WHERE
+		type=#{type} LIMIT
+		#{start},#{end}
+	</select>
+	<select id="select" resultMap="DateStageResult">
+		SELECT
+		stageName,grade,education,startDate,endDate FROM DateStage WHERE grade
+		=(SELECT grade FROM student WHERE
+		stuId=#{stuId})
+		AND
+		education=(SELECT
+		education FROM student WHERE
+		stuId=#{stuId}) AND stageName=#{stageName}
+	</select>
+	<select id="selectStageOfStu" resultMap="DateStageResult">
+		SELECT
+		stageName,grade,education,startDate,endDate FROM DateStage WHERE
+		grade
+		=(SELECT grade FROM student WHERE stuId=#{stuId}) AND
+		education=(SELECT education FROM student WHERE stuId=#{stuId}) AND
+		stageName LIKE #{stageNameLike}
+	</select>
+	<select id="selectCount" resultType="Integer">
+		SELECT count(*) FROM
+		DateStage WHERE type=#{type};
+	</select>
+	<delete id="delete">
+		DELETE FROM DateStage WHERE stageName=#{stageName}
+		AND grade=#{grade} AND education =#{education} AND type=#{type}
+	</delete>
+	<update id="update" parameterType="com.sys.entity.DateStage">
+		UPDATE DateStage SET
+		startDate=#{startDate},endDate=#{endDate} WHERE
+		stageName=#{stageName}
+		AND grade=#{grade} AND education =#{education} AND type=#{type}
+	</update>
+</mapper>

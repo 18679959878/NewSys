@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.TeacherMapper">
+	<resultMap type="com.sys.entity.Teacher" id="TeacherResult">
+		<id column="teaAccount" jdbcType="VARCHAR" property="teaAccount"></id>
+		<result column="teaName" jdbcType="VARCHAR" property="teaName"></result>
+		<result column="email" jdbcType="VARCHAR" property="email"></result>
+		<result column="password" jdbcType="VARCHAR" property="password"></result>
+		<!-- 实习指导学生 -->
+		<collection property="fieldworkStudents" column="fieldworkTea"
+			ofType="com.sys.entity.Student">
+			<id property="stuId" column="stuId"></id>
+			<result property="stuName" column="stuName"></result>
+			<result property="email" column="email"></result>
+			<result property="password" column="password"></result>
+			<result property="className" column="className"></result>
+			<result property="fieldworkTea" column="fieldworkTea"></result>
+			<result property="worksTea" column="worksTea"></result>
+		</collection>
+		<!-- 毕业设计指导学生 -->
+		<collection property="workStudents" column="workTea"
+			ofType="com.sys.entity.Student">
+			<id property="stuId" column="stuId"></id>
+			<result property="stuName" column="stuName"></result>
+			<result property="email" column="email"></result>
+			<result property="password" column="password"></result>
+			<result property="className" column="className"></result>
+			<result property="fieldworkTea" column="fieldworkTea"></result>
+			<result property="worksTea" column="worksTea"></result>
+		</collection>
+	</resultMap>
+	<insert id="save" parameterType="com.sys.entity.Teacher">
+		INSERT INTO
+		teacher(teaAccount,teaName,email,password)
+		VALUES(#{teaAccount},#{teaName},#{email},#{password})
+	</insert>
+	<select id="select" resultMap="TeacherResult" parameterType="String">
+		SELECT teaAccount,teaName,email,password FROM teacher WHERE
+		teaAccount=#{teaAccount}
+	</select>
+	<select id="selectPage" resultMap="TeacherResult">
+		SELECT
+		teaAccount,teaName,email,password FROM teacher LIMIT #{start},#{end}
+	</select>
+	<select id="selectAll" resultMap="TeacherResult">
+		SELECT teaAccount,teaName,email FROM teacher
+	</select>
+	<select id="selectCount" resultType="Integer">
+		SELECT count(*) FROM
+		teacher;
+	</select>
+	<delete id="delete" parameterType="String">
+		DELETE FROM teacher WHERE
+		teaAccount=#{teaAccount}
+	</delete>
+	<update id="update" parameterType="com.sys.entity.Teacher">
+		UPDATE teacher SET
+		teaName=#{teaName},email=#{email},password=#{password}
+		WHERE
+		teaAccount=#{teaAccount}
+	</update>
+	<insert id="insertOrupdateBatch" parameterType="com.sys.entity.Teacher">
+		INSERT INTO
+		teacher(teaAccount,teaName,email,password)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.teaAccount},#{item.teaName},#{item.email},#{item.password})
+		</foreach>
+		ON DUPLICATE KEY UPDATE
+		teaName =
+		values(teaName),email=values(email),password=values(password)
+	</insert>
+</mapper>

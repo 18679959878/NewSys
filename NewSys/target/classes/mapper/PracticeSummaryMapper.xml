@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.PracticeSummaryMapper">
+	<resultMap type="com.sys.entity.PracticeSummary" id="PracticeSummaryResult">
+		<id column="stuId" jdbcType="VARCHAR" property="stuId"></id>
+		<result column="summary" jdbcType="VARCHAR" property="summary"></result>
+	</resultMap>
+	<select id="select" parameterType="String" resultMap="PracticeSummaryResult">
+		SELECT
+		stuId,summary FROM
+		practiceSummary WHERE stuId=#{stuId}
+	</select>
+	<insert id="saveOrUpdate" parameterType="com.sys.entity.PracticeSummary">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			SELECT COUNT(*) FROM practiceSummary WHERE stuId = #{stuId}
+		</selectKey>
+		<if test="count > 0">
+			UPDATE practiceSummary
+			SET summary =
+			#{summary}
+			WHERE stuId
+			= #{stuId}
+		</if>
+		<if test="count==0">
+			insert into
+			practiceSummary(stuId,summary)
+			values(#{stuId},#{summary})
+		</if>
+
+	</insert>
+</mapper>

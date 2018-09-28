@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+<link rel="stylesheet" href="css/tip.css" />
+<link rel="stylesheet" href="css/sumbitButton.css">
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/msgbox.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-69" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_implementation.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-69" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_implementation.html">
+		<h1>
+			<img src="images/posts.png" alt="">
+			<code class="stageName"></code>
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="student_implementation_ma.html" class="shortcut" id="back">
+						<img src="images/callback.png" alt="" width="48" height="48">
+						返回上一页
+					</a> <a href="student_implementation.html" id="refurbish"
+						class="shortcut"> <img src="images/refurbish.png" alt=""
+						width="48" height="48"> 刷新页面
+					</a>
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				<code class="stageName"> </code>
+				<a href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="sketch">
+				<h1>
+					<code class="stageName"></code>
+					(插入图片)
+				</h1>
+				<code class="pNum"></code>
+				<div id="sketch" class="editor">
+					<h5 id="sh"></h5>
+				</div>
+				<div style="height: 40px;">
+					<p style="margin-left: 92%; font-size: 16px;">
+						<span id="contentAndRequired_error" style="color: red;"></span>
+					</p>
+				</div>
+				<div style="height: 40px;">
+					<p style="margin-left: 92%; font-size: 16px;">
+
+						<span id="liberature_error" style="color: red;"></span>
+					</p>
+				</div>
+				<div id="guidance" class="editor"></div>
+				<form action="/NewSys/dp/sop" id="add" method="post">
+					<textarea id="sketch_t" name="sketch" hidden="hidden"></textarea>
+					<textarea id="amendOpinion_t" name="amendOpinion" hidden="hidden"></textarea>
+					<textarea id="guidance_t" name="guidance" hidden="hidden"></textarea>
+					<input type="text" name="stageName" id="stageName_t"
+						hidden="hidden" />
+				</form>
+				<button id="but" onclick="tip()">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<script type="text/javascript">
+	//document.getElementById("stageName").innerHTML ="设计过程"+getQueryString("stageName").substring(0, 2);
+	$(".stageName").html("设计过程" + getQueryString("stageName").substring(getQueryString("stageName").length - 2, getQueryString("stageName").length));
+	$("#sh").html("设计过程(" + getQueryString("stageName").substring(getQueryString("stageName").length - 2, getQueryString("stageName").length - 1) + ")草图");
+	document.getElementById("refurbish").href = "student_implementation.html?stageName=" + getQueryString("stageName");
+	if (getQueryString("stageName") == "毕业设计定稿") {
+		$("#guidance").html("<p>" + getQueryString("stageName") + "指导意见：");
+	} else {
+		$(".pNum").html("(插入" + getQueryString("pNum") + "张图片,多余图片将不会被导出)");
+		$("#guidance").html("<p>" + getQueryString("stageName") + "指导意见：</p><p>1、</p><p>2、</p>");
+	}
+</script>
+<script type="text/javascript">
+	var editors = new Array();
+	var isLock = false;
+	function tip() {
+		if (isLock == false) {
+			$("#sketch_t").val(editors[0].txt.html());
+			$("#guidance_t").val(editors[1].txt.html());
+			$("#stageName_t").val(getQueryString("stageName"));
+			var targetUrl = $("#add").attr("action");
+			var sendData = $("#add").serialize();
+			$.ajax({
+				url : targetUrl,
+				type : 'POST', //POST
+				timeout : 5000, //超时时间
+				data : sendData,
+				dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+				success : function(data) {
+					if (data.success == true) {
+						var tip = "内容已保存";
+						ZENG.msgbox.show(tip, 4, 2000);
+					} else {
+						var tip = data.error;
+						ZENG.msgbox.show(tip, 5, 2000);
+					}
+				},
+				error : function(data) {
+					var tip = "内容保存失败";
+					ZENG.msgbox.show(tip, 5, 2000);
+				}
+			});
+		} else {
+			var tip = "内容被锁定，无法保存";
+			ZENG.msgbox.show(tip, 5, 2000);
+		}
+	}
+</script>
+<script type="text/javascript">
+	var E = window.wangEditor;
+	var editors = new Array();
+	var nums = 0;
+	var isLock = false;
+	editors[0] = new E("#sketch");
+	editors[1] = new E("#guidance");
+	for (var i = 0; i < editors.length; i++) {
+		if (i == 0) {
+			editors[i].customConfig.menus = [
+				'image', // 插入图片
+				'undo', // 撤销
+				'redo' // 重复
+
+			];
+			editors[i].customConfig.uploadImgServer = '/NewSys/photo/wangEditorUpload';
+			editors[i].customConfig.uploadFileName = 'photo';
+		} else {
+			editors[i].customConfig.menus = [
+				'head', // 标题
+				'fontSize',
+				'list',
+				'justify',
+				'undo',
+				'redo',
+				'bold', // 粗体
+				'code' // 插入代码
+			];
+		}
+		editors[i].customConfig.onchange = function(html) {
+			//	$("#contentAndRequired_t").val(html);
+			var length = removeHTMLTag(html).length;
+			if ((length - nums >= 20) || (length - nums <= -20)) {
+				nums = length;
+				tip();
+			}
+		}
+
+		editors[i].create();
+		if (i != 0) {
+			editors[i].$textElem.attr('contenteditable', false);
+		}
+	}
+	function createData(editors) {
+		$.ajax({
+			url : "/NewSys/dp/sel",
+			type : 'GET',
+			timeout : 5000, //超时时间
+			data : "stageName=" + getQueryString("stageName"),
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success) {
+					editors[0].txt.html(data.data.sketch);
+					editors[1].txt.html(data.data.guidance);
+					isLock = data.data.isLock;
+					if (data.data.isLcock == true) {
+						$("#but").css("background", "#C0C0C0");
+						$("#but").html("已&nbsp;&nbsp;锁&nbsp;&nbsp;&nbsp;定");
+					} else {
+						$("#but").css("background", "");
+						$("#but").html("提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交");
+					}
+				}
+			}
+		});
+	}
+	createData(editors);
+</script>
+<br>
+</html>

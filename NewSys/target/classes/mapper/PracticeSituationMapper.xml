@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.PracticeSituationMapper">
+	<resultMap type="com.sys.entity.PracticeSituation" id="PracticeSituationResult">
+		<id column="stuId" jdbcType="VARCHAR" property="stuId"></id>
+		<result column="fullWork" jdbcType="INTEGER" property="fullWork"></result>
+		<result column="absenceLeave" jdbcType="INTEGER" property="absenceLeave"></result>
+		<result column="sickLeave" jdbcType="INTEGER" property="sickLeave"></result>
+		<result column="late" jdbcType="INTEGER" property="late"></result>
+		<result column="leaveEarly" jdbcType="INTEGER" property="leaveEarly"></result>
+		<result column="absent" jdbcType="INTEGER" property="absent"></result>
+		<result column="workSituation" jdbcType="VARCHAR" property="workSituation"></result>
+		<result column="score" jdbcType="INTEGER" property="score"></result>
+		<result column="isLock" jdbcType="BOOLEAN" property="isLock"></result>
+	</resultMap>
+	<select id="select" parameterType="String" resultMap="PracticeSituationResult">
+		SELECT
+		stuId,fullWork,absenceLeave,sickLeave,late,leaveEarly,absent,workSituation,score,isLock
+		FROM
+		practiceSituation WHERE stuId=#{stuId}
+	</select>
+	<insert id="saveOrUpdate" parameterType="com.sys.entity.PracticeSituation">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			SELECT COUNT(*) FROM practiceSituation WHERE stuId = #{stuId}
+		</selectKey>
+		<if test="count > 0">
+			UPDATE practiceSituation
+			SET fullWork =
+			#{fullWork},absenceLeave=#{absenceLeave},sickLeave=#{sickLeave},late=#{late},leaveEarly=#{leaveEarly},absent=#{absent},workSituation=#{workSituation},score=#{score},isLock=#{isLock}
+			WHERE stuId =
+			#{stuId}
+		</if>
+		<if test="count==0">
+			INSERT INTO
+			practiceSituation(stuId,fullWork,absenceLeave,sickLeave,late,leaveEarly,absent,workSituation,score,isLock)
+			VALUES(#{stuId},#{fullWork},#{absenceLeave},#{sickLeave},#{late},#{leaveEarly},#{absent},#{workSituation},#{score},#{isLock})
+		</if>
+	</insert>
+</mapper>

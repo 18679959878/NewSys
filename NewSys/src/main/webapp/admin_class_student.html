@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<script type="text/javascript" src="js/admin_class_student.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-5" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_class_student.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-5" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_class_student.html">
+		<h1>
+			<img src="images/posts.png" alt="">学生管理
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="admin_class_ma.html" class="shortcut" id="back"> <img
+						src="images/callback.png" alt="" width="48" height="48">
+						返回上一页
+					</a> <a href="admin_class_student_add.html"
+						class="shortcut zoombox w500 h550" id="add"> <img
+						src="images/glyph-add.png" alt="" width="48" height="48">
+						添加单个学生
+					</a> <a href="/NewSys/download/template?fileName=学生信息表模板.xlsx"
+						class="shortcut"> <img src="images/download.png" alt=""
+						width="48" height="48"> 下载导入模板
+					</a> <a href="#" id="upload_stu" class="shortcut"> <img
+						src="images/download.png" alt="" width="48" height="48">
+						下载本班学生表
+					</a><a href="upload.html?type=0" class="shortcut" id="upload"> <img
+						src="images/upload.png" alt="" width="48" height="48">
+						批量导入学生
+					</a><a href="admin_class_student.html" id="refurbish" class="shortcut">
+						<img src="images/refurbish.png" alt="" width="48" height="48">
+						刷新页面
+					</a>
+
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				班级列表 <a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+				<table>
+					<thead>
+						<tr>
+							<th>学号</th>
+							<th>姓名</th>
+							<th>班级</th>
+							<th>邮箱</th>
+							<th>密码</th>
+							<th>实习期指导老师</th>
+							<th>毕业设计指导老师</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="studentList">
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+						<tr>
+							<td name="stuId"></td>
+							<td name="stuName"></td>
+							<td name="className"></td>
+							<td name="email"></td>
+							<td name="password"></td>
+							<td name="worksTea"></td>
+							<td name="fieldworkTea"></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteStudent(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	document.getElementById("upload_stu").href = "/NewSys/download/excel/student?className=" + getQueryString("className");
+	document.getElementById("back").href = "admin_class_ma.html?nowPage=" + getQueryString("nowPage");
+	document.getElementById("add").href = "admin_class_student_add.html?className=" + getQueryString("className");
+	document.getElementById("upload").href = "upload.html?type=0&className=" + getQueryString("className") + "&nowPage=" + getQueryString("nowPage");
+	var className = getQueryString("className");
+	document.getElementById("refurbish").href = "admin_class_student.html?className=" + getQueryString("className");
+	createStudentData(getQueryString("className"));
+</script>
+</html>

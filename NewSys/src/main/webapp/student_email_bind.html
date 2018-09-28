@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+<link rel="stylesheet" href="css/tip.css" />
+<link rel="stylesheet" href="css/sumbitButton.css">
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/msgbox.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script type="text/javascript" src="js/inputmail.js"></script>
+<style type="text/css">
+ul, li {
+	list-style: none;
+}
+
+h1.tit-h1 {
+	font-size: 38px;
+	text-align: center;
+	margin: 30px 0 15px;
+	color: #f60;
+}
+
+.wrap {
+	border: 1px dashed #ccc;
+	background: #f8f8f8;
+	padding: 20px;
+}
+
+.email {
+	width: 400px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.password {
+	width: 400px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.email input {
+	width: 230px;
+	height: 28px;
+	margin: 10px 0;
+	line-height: 28px;
+}
+
+.email .on_changes {
+	width: 232px;
+	position: absolute;
+	top: 40px;
+	list-style: none;
+	background: #FFF;
+	border: 1px solid #000;
+	display: none;
+}
+
+.email .on_changes li {
+	margin: 8px;
+	padding: 4px;
+}
+
+.email .on_changes li.active {
+	background: #CEE7FF;
+}
+</style>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+a, img {
+	border: 0;
+}
+
+body {
+	font: 12px/180% Arial, Helvetica, sans-serif, "新宋体";
+}
+
+.demo {
+	width: 300px;
+	margin: 60px auto 10px auto
+}
+
+@media only screen and (min-width: 420px) {
+	.demo {
+		width: 500px;
+		margin: 60px auto 10px auto
+	}
+}
+
+.demo p {
+	line-height: 36px
+}
+
+.button {
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-align: center;
+	text-decoration: none;
+	font: 16px/100% 'Microsoft yahei', Arial, Helvetica, sans-serif;
+	padding: .5em 2em .55em;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	color: #606060;
+	border: solid 1px #b7b7b7;
+	background: #ededed;
+}
+
+.button:hover {
+	text-decoration: none;
+	background: #fff;
+}
+
+.button:active {
+	position: relative;
+	top: 1px;
+	color: #999;
+}
+</style>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-61" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_email_bind.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-61" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_email_bind.html">
+		<h1>
+			<img src="images/posts.png" alt="">绑定邮箱
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="admin_class_ma.html" class="shortcut"> <img
+						src="images/refurbish.png" alt="" width="48" height="48">
+						刷新页面
+					</a>
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				绑定邮箱<a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+				<div class="email"
+					style="padding-top: 120px; padding-bottom: 300px;">
+					<span id="e_error"></span>
+					<form action="http://www.17sucai.com/" method="post" name="myform">
+						<div style="padding:0 0 0 78px;">
+							<span style="font-size: 20px;">邮箱：</span><input type="text"
+								maxlength="128" name="email" id="email" placeholder="邮箱" /> <span
+								id="e_error"></span>
+						</div>
+						<div style="padding:0 0 0 78px;">
+							<span style="font-size: 20px;">密码：</span><input type="text"
+								maxlength="128" name="password" id="password" placeholder="密码" />
+							<span id="p_error"></span>
+						</div>
+						<div style="padding:0 0 0 140px;">
+							<input type="button" class="button" value="发送邮箱验证" id="phone_btn"
+								name="phone" onClick="showtime(30)"
+								style="padding-bottom: 3px; height: 40px;">
+						</div>
+					</form>
+					<ul class="on_changes"
+						style="position: absolute; left: 112px; top: 162px">
+						<li email="">请选择邮箱类型</li>
+						<li email=""></li>
+						<li email="@sina.com"></li>
+						<li email="@163.com"></li>
+						<li email="@qq.com"></li>
+						<li email="@hotmail.com"></li>
+						<li email="@126.com"></li>
+						<li email="@gmail.com"></li>
+						<li email="@yahoo.com"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<script type="text/javascript">
+	$(function() {
+		$("#email").changeTips({
+			divTip : ".on_changes"
+		});
+	});
+	var secs = 30;
+	document.agree.agreeb.disabled = true;
+	for (var i = 1; i <= secs; i++) {
+		window.setTimeout("update(" + i + ")", i * 1000);
+	}
+	function showtime(t) {
+		document.myform.phone.disabled = true;
+		for (i = 1; i <= t; i++) {
+			window.setTimeout("update_p(" + i + "," + t + ")", i * 1000);
+		}
+
+	}
+	function update_p(num, t) {
+		if (num == t) {
+			document.myform.phone.value = " 重新发送 ";
+			document.myform.phone.disabled = false;
+		} else {
+			printnr = t - num;
+			document.myform.phone.value = " (" + printnr + ")秒后重新发送";
+		}
+	}
+</script>
+<br>
+</html>
+

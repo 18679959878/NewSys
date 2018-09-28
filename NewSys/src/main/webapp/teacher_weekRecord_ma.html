@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-107" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/teacher_weekRecord_ma.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-107" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/teacher_weekRecord_ma.html">
+		<h1>
+			<img src="images/posts.png" alt="">实习管理
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				实习管理 <a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+				<table>
+					<thead>
+						<tr>
+							<th>周数</th>
+							<th>开始时间</th>
+							<th>结束时间</th>
+							<th>查看/编辑</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="view_editor"><a name="seeUrl"
+								href="teacher_weekRecord_stu.html">查看/编辑</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="view_editor"><a name="seeUrl"
+								href="teacher_weekRecord_stu.html">查看/编辑</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="view_editor"><a name="seeUrl"
+								href="teacher_weekRecord_stu.html">查看/编辑</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="view_editor"><a name="seeUrl"
+								href="teacher_weekRecord_stu.html">查看/编辑</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="view_editor"><a name="seeUrl"
+								href="teacher_weekRecord_stu.html">查看/编辑</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="view_editor"><a name="seeUrl"
+								href="teacher_weekRecord_stu.html">查看/编辑</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="view_editor"><a name="seeUrl"
+								href="teacher_weekRecord_stu.html">查看/编辑</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="view_editor"><a name="seeUrl"
+								href="teacher_weekRecord_stu.html">查看/编辑</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="view_editor"><a name="seeUrl"
+								href="teacher_weekRecord_stu.html">查看/编辑</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="view_editor"><a name="seeUrl"
+								href="teacher_weekRecord_stu.html">查看/编辑</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<script type="text/javascript">
+	var maxPage = 0;
+	var nowPage = 1;
+	var t_type = 0;
+	function createData(nowPage, type) {
+		if (type == null) {
+			type = t_type;
+		}
+		t_type = type;
+		nowPage = nowPage;
+		$.ajax({
+			url : '/NewSys/ds/page',
+			type : 'GET', //
+			timeout : 5000, //超时时间
+			data : "queryPage=" + nowPage + "&type=" + type,
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success == true) {
+					var data2 = data.data;
+					maxPage = data2.maxPage;
+					var pageList = data2.pageList;
+					var stageNameNodes = document.getElementsByName("stageName");
+					var startDateNodes = document.getElementsByName("startDate");
+					var endDateNodes = document.getElementsByName("endDate");
+					var seeNodes = document.getElementsByName("seeUrl");
+					for (var i = 0; i < 10; i++) {
+						if (i < pageList.length) {
+							stageNameNodes[i].innerHTML = pageList[i].stageName;
+							startDateNodes[i].innerHTML = pageList[i].startDate.substr(0, pageList[i].startDate.indexOf(" "));
+							endDateNodes[i].innerHTML = pageList[i].endDate.substr(0, pageList[i].endDate.indexOf(" "));
+							seeNodes[i].href = "teacher_weekRecord_stu.html?stageName=" + pageList[i].stageName;
+						//	seeUrlNodes[i].href = "admin_class_student.html?className=" + pageList[i].className+"&nowPage="+nowPage;
+						} else {
+							stageNameNodes[i].innerHTML = "";
+							startDateNodes[i].innerHTML = "";
+							endDateNodes[i].innerHTML = "";
+							seeNodes[i].href = "teacher_weekRecord_stu.html";
+						//	seeUrlNodes[i].href = "admin_class_student.html?className=" + pageList[i].className+"&nowPage="+nowPage;
+						}
+					}
+					document.getElementById("page").innerHTML = html;
+					document.getElementById(nowPage).className = "current";
+				}
+			}
+		})
+	}
+
+	createData(nowPage, t_type);
+</script>
+<br>
+</html>

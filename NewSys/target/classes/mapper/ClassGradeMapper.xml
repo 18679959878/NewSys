@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.ClassGradeMapper">
+	<resultMap type="com.sys.entity.ClassGrade" id="ClassGradeResult">
+		<id column="className" jdbcType="VARCHAR" property="className"></id>
+		<result column="grade" jdbcType="VARCHAR" property="grade"></result>
+		<result column="education" jdbcType="VARCHAR" property="education"></result>
+		<result column="stuNum" javaType="INT" property="stuNum"></result>
+		<result column="major" jdbcType="VARCHAR" property="major" />
+		<result column="classType" javaType="INT" property="classType" />
+		<result column="filedWorkTea" jdbcType="VARCHAR" property="filedWorkTea" />
+		<collection property="students" column="className"
+			ofType="com.sys.entity.Student">
+			<id property="stuId" column="stuId"></id>
+			<result property="stuName" column="stuName"></result>
+			<result property="email" column="email"></result>
+			<result property="password" column="password"></result>
+			<result property="className" column="className"></result>
+			<result property="fieldworkTea" column="fieldworkTea"></result>
+			<result property="worksTea" column="worksTea"></result>
+		</collection>
+		<collection property="majorStudents" column="className"
+			ofType="com.sys.entity.Student">
+			<id property="stuId" column="stuId"></id>
+			<result property="stuName" column="stuName"></result>
+			<result property="email" column="email"></result>
+			<result property="password" column="password"></result>
+			<result property="className" column="className"></result>
+			<result property="fieldworkTea" column="fieldworkTea"></result>
+			<result property="worksTea" column="worksTea"></result>
+		</collection>
+	</resultMap>
+	<insert id="save" parameterType="com.sys.entity.ClassGrade">
+		INSERT INTO
+		classgrade(className,grade,education,major,filedWorkTea)
+		VALUES(#{className},#{grade},#{education},#{major},#{filedWorkTea})
+	</insert>
+	<select id="select" parameterType="String" resultMap="ClassGradeResult">
+		SELECT
+		className,grade,education,stuNum,major FROM classgrade WHERE
+		className=#{className}
+	</select>
+	<select id="selectOfClassType" resultMap="ClassGradeResult">
+		SELECT
+		className,grade,education,stuNum,major FROM classgrade WHERE
+		className=#{className} AND classType=#{classType}
+	</select>
+	<select id="selectAllClassName" resultType="String">
+		SELECT className FROM
+		classgrade
+	</select>
+	<select id="selectPage" resultMap="ClassGradeResult">
+		SELECT
+		className,grade,education,stuNum,major FROM
+		classgrade WHERE
+		classType=#{classType} LIMIT #{start},#{end}
+	</select>
+	<select id="selectClassGradePageOfDateStage" resultMap="ClassGradeResult">
+		SELECT
+		className grade,education,stuNum,major,filedWorkTea FROM
+		classgrade
+		WHERE classType=#{classType} AND
+		grade IN (SELECT
+		grade FROM DateStage
+		WHERE type=#{stageType}) LIMIT #{start},#{end}
+	</select>
+	<select id="selectCountOfDateStage" resultType="Integer">
+		SELECT count(*)
+		FROM
+		classgrade WHERE classType=#{classType} AND
+		grade IN (SELECT
+		grade
+		FROM DateStage WHERE type=#{stageType});
+	</select>
+	<select id="selectCount" resultType="Integer" parameterType="Integer">
+		SELECT count(*) FROM
+		classgrade WHERE classType=#{classType};
+	</select>
+	<delete id="deleteClass" parameterType="String">
+		DELETE FROM classgrade
+		WHERE className=#{className};
+		DELETE FROM student WHERE
+		className=#{className}
+	</delete>
+	<update id="updateClass" parameterType="com.sys.entity.ClassGrade">
+		UPDATE classgrade SET
+		grade=#{grade},education=#{education},major=#{major} WHERE
+		className=#{className}
+	</update>
+	<update id="addStuNum" parameterType="String">
+		UPDATE classgrade SET
+		stuNum=stuNum+1 WHERE
+		className=#{className}
+	</update>
+	<update id="reduceStuNum" parameterType="String">
+		UPDATE classgrade SET
+		stuNum=stuNum-1 WHERE
+		className=#{className}
+	</update>
+	<update id="resetStuNum" parameterType="String">
+		<foreach collection="list" item="item" index="index"
+			separator=";">
+			UPDATE classgrade SET stuNum = (SELECT count(*) FROM
+			student WHERE className=#{item}) WHERE className=#{item}
+		</foreach>
+	</update>
+</mapper>

@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: NewSys_Maven_Webapp
+Bundle-SymbolicName: NewSys_Maven_Webapp
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.sys.annotation,
+ com.sys.aspect,
+ com.sys.dao,
+ com.sys.dto,
+ com.sys.entity,
+ com.sys.exception,
+ com.sys.old,
+ com.sys.service,
+ com.sys.test,
+ com.sys.utils,
+ com.sys.web

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+<link rel="stylesheet" href="css/tip.css" />
+<link rel="stylesheet" href="css/sumbitButton.css">
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/msgbox.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-103" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/teacher_task.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-103" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/teacher_task.html">
+		<h1>
+			<img src="images/posts.png" alt="">毕业设计（论文）任务书
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="teacher_task_ma.html" class="shortcut" id="back"> <img
+						src="images/callback.png" alt="" width="48" height="48">
+						返回上一页
+					</a><a href="teacher_task.html" id="refurbish" class="shortcut"> <img
+						src="images/refurbish.png" alt="" width="48" height="48">
+						刷新页面
+					</a>
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				毕业设计（论文）任务书 <a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+				<form method="post" action="/NewSys/fptask/sop" id="add">
+					<h1>毕业设计（论文）任务书</h1>
+					<div id="contentAndRequired">
+						<h5>一、毕业设计（论文）内容和要求</h5>
+					</div>
+					<div style="height: 40px;">
+						<p style="margin-left: 92%; font-size: 16px;">
+							<span id="contentAndRequired_error" style="color: red;"></span>
+						</p>
+					</div>
+					<div id="liberature">
+						<h5>二、参考文献</h5>
+						<p>示例：</p>
+						<p>[1]（英）加文·安布罗斯，（英）保罗·哈里斯.创造品牌的包装设计[M].北京：中国青年出版社.2012.01.</p>
+						<p style="font-weight: bold;">[1]作者，作者.书名[M].出版社地点：出版社.年.月.</p>
+						<p>[2]郑仁龙.包装设计如何面对电商时代——对网购包装设计的思考[J].黄河之声.2014（20）</p>
+						.
+						<p style="font-weight: bold;">[2]作者.论文题目[J].期刊名称.年（第几期）.</p>
+						<p>[10]王思雯.香奈儿香水品牌形象在包装设计中的视觉呈现[D].河北：河北大学.2014.01.</p>
+						<p style="font-weight: bold;">[10]作者.论文题目[D].毕业院校地点：毕业院校.年.月.</p>
+
+						<p style="font-weight: bold;">[M]书 [J]期刊 [D]硕博学位论文
+							注意：点的前后不要有空格（看完请删除）</p>
+					</div>
+					<div style="height: 40px;">
+						<p style="margin-left: 92%; font-size: 16px;">
+							<span id="liberature_error" style="color: red;"></span>
+						</p>
+					</div>
+					<textarea hidden="hidden" name="contentAndRequired"
+						id="contentAndRequired_t"></textarea>
+					<textarea hidden="hidden" name="liberature" id="liberature_t"></textarea>
+					<input hidden="hidden" name="stuId" id="stuId" type="text"></input>
+				</form>
+				<button onclick="tip()">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<script type="text/javascript">
+	function tip() {
+		var targetUrl = $("#add").attr("action");
+		var sendData = $("#add").serialize();
+		$.ajax({
+			url : targetUrl,
+			type : 'POST', //POST
+			timeout : 5000, //超时时间
+			data : sendData,
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success == true) {
+					var tip = "内容已保存";
+					ZENG.msgbox.show(tip, 4, 2000);
+				} else {
+					var tip = data.error;
+					ZENG.msgbox.show(tip, 5, 2000);
+				}
+			},
+			error : function(data) {
+				var tip = "内容保存失败";
+				ZENG.msgbox.show(tip, 5, 2000);
+			}
+		});
+	}
+</script>
+<script type="text/javascript">
+	$("#stuId").val(getQueryString("stuId"));
+	var lastliberatureNum = 0;
+	var lastcontentAndRequiredNum = 0;
+	var E = window.wangEditor;
+	var liberature = new E('#liberature');
+	var E = window.wangEditor;
+	var contentAndRequired = new E('#contentAndRequired');
+	// 或者 var editor = new E( document.getElementById('editor') )
+
+	liberature.customConfig.menus = [
+		'fontSize',
+		'list',
+		'justify',
+		'undo',
+		'redo',
+		'bold', // 粗体
+	];
+	liberature.customConfig.onchange = function(html) {
+		// html 即变化之后的内容
+		$("#liberature_t").val(html);
+		var length = removeHTMLTag(html).length;
+		if (length > 800) {
+			$("#liberature_error").css("color", "red");
+			$("#liberature_error").html(length + "字");
+		} else if (length < 500) {
+			$("#liberature_error").css("color", "red");
+			$("#liberature_error").html(length + "字");
+		} else {
+			$("#liberature_error").css("color", "green");
+			$("#liberature_error").html(length + "字");
+		}
+		if ((length - lastliberatureNum >= 20) || (length - lastliberatureNum <= -20)) {
+			lastliberatureNum = length;
+			tip();
+		}
+	}
+	liberature.create();
+	$("#liberature_t").val(liberature.txt.html())
+	contentAndRequired.customConfig.onchange = function(html) {
+		$("#contentAndRequired_t").val(html);
+		var length = removeHTMLTag(html).length;
+		if (length > 120) {
+			$("#contentAndRequired_error").css("color", "red");
+			$("#contentAndRequired_error").html(length + "字");
+		} else if (length < 80) {
+			$("#contentAndRequired_error").css("color", "red");
+			$("#contentAndRequired_error").html(length + "字");
+		} else {
+			$("#contentAndRequired_error").css("color", "green");
+			$("#contentAndRequired_error").html(length + "字");
+		}
+		if ((length - lastcontentAndRequiredNum >= 20) || (length - lastcontentAndRequiredNum <= -20)) {
+			lastcontentAndRequiredNum = length;
+			tip();
+		}
+	}
+	contentAndRequired.customConfig.menus = [
+		'fontSize',
+		'list',
+		'justify',
+		'undo',
+		'redo',
+		'bold', // 粗体
+	]
+	contentAndRequired.create();
+	$("#contentAndRequired_t").val(contentAndRequired.txt.html())
+	function removeHTMLTag(str) {
+		str = str.replace(/<\/?[^>]*>/g, ''); //去除HTML tag
+		str = str.replace(/[ | ]*\n/g, '\n'); //去除行尾空白
+		str = str.replace(/&nbsp;/ig, ''); //去掉&nbsp;
+		return str;
+	}
+	function createData(stuId, contentAndRequired, liberature) {
+		$.ajax({
+			url : "/NewSys/fptask/sel",
+			type : 'GET', //POST
+			timeout : 5000, //超时时间
+			data : "stuId=" + stuId,
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success) {
+					$("#contentAndRequired_t").val(data.data.contentAndRequire);
+					contentAndRequired.txt.html(data.data.contentAndRequire);
+					$("#liberature_t").val(data.data.literature);
+					liberature.txt.html(data.data.literature);
+				}
+			}
+		});
+	}
+	createData(getQueryString("stuId"), contentAndRequired, liberature);
+</script>
+
+<br>
+<script type="text/javascript">
+	document.getElementById("refurbish").href = "teacher_task.html?stuId=" + getQueryString("stuId") + "&nowPage=" + getQueryString("nowPage");
+	document.getElementById("back").href = "teacher_task_ma.html?nowPage=" + getQueryString("nowPage");
+</script>
+</html>
+

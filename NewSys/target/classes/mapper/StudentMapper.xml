@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.StudentMapper">
+	<resultMap type="com.sys.entity.Student" id="StudentResult">
+		<id column="stuId" jdbcType="VARCHAR" property="stuId"></id>
+		<result column="stuName" jdbcType="VARCHAR" property="stuName"></result>
+		<result column="email" jdbcType="VARCHAR" property="email"></result>
+		<result column="password" jdbcType="VARCHAR" property="password"></result>
+		<result column="className" jdbcType="VARCHAR" property="className"></result>
+		<result column="fieldworkTea" jdbcType="VARCHAR" property="fieldworkTea"></result>
+		<result column="workTea" jdbcType="VARCHAR" property="worksTea"></result>
+		<result column="majorClassName" jdbcType="VARCHAR" property="majorClassName" />
+	</resultMap>
+	<insert id="save" parameterType="com.sys.entity.Student">
+		INSERT INTO
+		student(stuId,stuName,password,className)
+		VALUES(#{stuId},#{stuName},#{password},#{className});
+		UPDATE classgrade
+		SET stuNum=stuNum+1 WHERE className = #{className}
+	</insert>
+	<select id="select" parameterType="String" resultMap="StudentResult">
+		SELECT
+		stuId,stuName,email,password,className,fieldworkTea,workTea FROM
+		student WHERE stuId=#{stuId}
+	</select>
+	<select id="selectFiledStuCount" resultType="Integer">SELECT
+		count(*) FROM
+		student WHERE
+		fieldworkTea=#{fieldworkTea}
+	</select>
+	<select id="selectFiledStuPage" resultMap="StudentResult">SELECT
+		stuId,stuName,email,password,className,fieldworkTea,workTea FROM
+		student WHERE fieldworkTea=#{fieldworkTea} LIMIT #{start},#{end}
+	</select>
+	<select id="selectClassStudents" parameterType="String"
+		resultMap="StudentResult">
+		SELECT
+		stuId,stuName,email,password,className,fieldworkTea,workTea FROM
+		student WHERE className=#{className}
+	</select>
+	<select id="selectFieldworkStudents" resultMap="StudentResult"
+		parameterType="String">SELECT
+		stuId,stuName,email,password,className,fieldworkTea,workTea FROM
+		student WHERE fieldworkTea=#{fieldworkTea}
+	</select>
+	<select id="selectworkTeaStudents" resultMap="StudentResult"
+		parameterType="String">SELECT
+		stuId,stuName,email,password,className,fieldworkTea,workTea FROM
+		student WHERE workTea=#{workTea}
+	</select>
+	<update id="update" parameterType="com.sys.entity.Student">
+		UPDATE student
+		<trim prefix="set" suffixOverrides=",">
+			<if test="stuName!=null">stuName=#{stuName},</if>
+			<if test="email!=null">email=#{email},</if>
+			<if test="password!=null">password=#{password},</if>
+			<if test="className!=null">className=#{className},</if>
+			fieldworkTea=#{fieldworkTea},
+			<if test="worksTea!=null">workTea=#{worksTea}</if>
+		</trim>
+		WHERE stuId=#{stuId}
+	</update>
+	<delete id="delete" parameterType="String">
+		DELETE FROM student WHERE
+		stuId=#{stuId};
+		UPDATE classgrade
+		SET stuNum=stuNum-1 WHERE className =
+		#{className}
+	</delete>
+	<insert id="insertOrupdateBatch" parameterType="com.sys.entity.Student">
+		INSERT INTO
+		student(stuId,stuName,email,password,className,fieldworkTea,workTea)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.stuId},#{item.stuName},#{item.email},#{item.password},#{item.className},#{item.fieldworkTea},#{item.worksTea})
+		</foreach>
+		ON DUPLICATE KEY UPDATE
+		stuName =
+		values(stuName),email=values(email),password=values(password),className=values(className),fieldworkTea
+		= values(fieldworkTea),workTea=values(workTea)
+	</insert>
+</mapper>

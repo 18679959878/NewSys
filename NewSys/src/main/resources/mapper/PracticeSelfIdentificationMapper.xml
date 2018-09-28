@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.PracticeSelfIdentificationMapper">
+	<resultMap type="com.sys.entity.PracticeSelfIdentification" id="PracticeSelfIdentificationResult">
+		<id column="stuId" jdbcType="VARCHAR" property="stuId"></id>
+		<result column="identification" jdbcType="VARCHAR" property="identification"></result>
+	</resultMap>
+	<select id="select" parameterType="String" resultMap="PracticeSelfIdentificationResult">
+		SELECT
+		stuId,identification FROM
+		practiceSelfIdentification WHERE stuId=#{stuId}
+	</select>
+	<insert id="saveOrUpdate" parameterType="com.sys.entity.PracticeSummary">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			SELECT COUNT(*) FROM practiceSelfIdentification WHERE stuId = #{stuId}
+		</selectKey>
+		<if test="count > 0">
+			UPDATE practiceSelfIdentification
+			SET identification =
+			#{identification}
+			WHERE stuId
+			= #{stuId}
+		</if>
+		<if test="count==0">
+			insert into
+			practiceSelfIdentification(stuId,identification)
+			values(#{stuId},#{identification})
+		</if>
+
+	</insert>
+</mapper>

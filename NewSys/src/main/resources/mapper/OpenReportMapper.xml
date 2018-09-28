@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.OpenReportMapper">
+	<resultMap type="com.sys.entity.OpenReport" id="OpenReportResult">
+		<id column="stuId" jdbcType="VARCHAR" property="stuId"></id>
+		<result column="basisAndSignificance" jdbcType="VARCHAR"
+			property="basisAndSignificance"></result>
+		<result column="situation" jdbcType="VARCHAR" property="situation"></result>
+		<result column="researchContent" jdbcType="VARCHAR" property="researchContent"></result>
+		<result column="proposal" jdbcType="VARCHAR" property="proposal"></result>
+		<result column="literature" jdbcType="VARCHAR" property="literature"></result>
+		<result column="otherInstructions" jdbcType="VARCHAR" property="otherInstructions"></result>
+		<result column="agree" jdbcType="VARCHAR" property="agree" />
+		<result column="isLock" jdbcType="BOOLEAN" property="isLock" />
+		<result column="score" jdbcType="INTEGER" property="score" />
+	</resultMap>
+	<select id="select" parameterType="String" resultMap="OpenReportResult">
+		SELECT
+		stuId,basisAndSignificance,situation,researchContent,proposal,literature,otherInstructions,agree,isLock,score
+		FROM openReport WHERE stuId=#{stuId}
+	</select>
+	<insert id="saveOrUpdate" parameterType="com.sys.entity.OpenReport">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			SELECT COUNT(*) FROM openReport WHERE stuId = #{stuId}
+		</selectKey>
+		<if test="count > 0">
+			UPDATE openReport
+			SET basisAndSignificance =
+			#{basisAndSignificance},situation =
+			#{situation},researchContent =
+			#{researchContent},proposal =
+			#{proposal},literature=#{literature},otherInstructions=#{otherInstructions},agree=#{agree},score=#{score},isLock=#{isLock}
+			WHERE stuId = #{stuId}
+		</if>
+		<if test="count==0">
+			insert into
+			openReport(stuId,basisAndSignificance,situation,researchContent,proposal,literature,otherInstructions,agree,isLock,score)
+			values(#{stuId},#{basisAndSignificance},#{situation},#{researchContent},#{proposal},#{literature},#{otherInstructions},#{agree},#{isLock},#{score})
+		</if>
+
+	</insert>
+</mapper>

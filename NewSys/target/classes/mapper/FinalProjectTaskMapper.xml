@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.FinalProjectTaskMapper">
+	<resultMap type="com.sys.entity.FinalProjectTask" id="FinalProjectTaskResult">
+		<id column="stuId" jdbcType="VARCHAR" property="stuId"></id>
+		<result column="contentAndRequire" jdbcType="VARCHAR" property="contentAndRequire" />
+		<result column="literature" jdbcType="VARCHAR" property="literature" />
+	</resultMap>
+	<select id="select" parameterType="String" resultMap="FinalProjectTaskResult">
+		SELECT
+		stuId,contentAndRequire,literature FROM finalProjectTask WHERE
+		stuId=#{stuId};
+	</select>
+	<insert id="saveOrUpdate" parameterType="com.sys.entity.FinalProjectTask">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			SELECT COUNT(*) FROM finalProjectTask WHERE stuId = #{stuId}
+		</selectKey>
+		<if test="count > 0">
+			UPDATE finalProjectTask
+			SET contentAndRequire =
+			#{contentAndRequire},literature =
+			#{literature}
+			WHERE stuId = #{stuId}
+		</if>
+		<if test="count==0">
+			insert into
+			finalProjectTask(stuId,contentAndRequire,literature)
+			values(#{stuId},#{contentAndRequire},#{literature})
+		</if>
+
+	</insert>
+</mapper>

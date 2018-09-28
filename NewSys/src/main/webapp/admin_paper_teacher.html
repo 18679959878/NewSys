@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+<link rel="stylesheet" href="css/tip.css" />
+
+
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/msgbox.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/admin_class_ma.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<style>
+#choose {
+	width: 200px;
+	height: 24px;
+	/*line-height: 36px;*/
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	outline: none;
+	padding: 0 10px;
+}
+
+#informationBtn {
+	width: 220px;
+	height: 36px;
+	line-height: 36px;
+	border: 0;
+	color: #ffffff;
+	text-align: center;
+	background: deepskyblue;
+	border-radius: 3px;
+	cursor: pointer;
+	margin-top: 50px;
+}
+
+.choose-screening-input {
+	position: relative;
+}
+
+.auto-screening {
+	position: absolute;
+	z-index: 9;
+	overflow: hidden;
+	border: 0px solid #cccccc;
+	border-bottom: 0;
+	border-top: 0;
+	padding-left: 124px;
+	opacity: 0.5;
+}
+
+.auto-screening-prompt {
+	width: 180px;
+	height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid #cccccc;
+	background: #ffffff;
+	padding: 0 20px;
+}
+
+.auto-screening-prompt:hover {
+	background: #cccccc;
+}
+</style>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-16" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_paper_teacher.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-16" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_paper_teacher.html">
+		<h1>
+			<img src="images/posts.png" alt="">指导老师设置
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="admin_class_ma_edit.html"
+						class="shortcut zoombox w500 h300"> <img
+						src="images/glyph-add.png" alt="" width="48" height="48">
+						添加班级
+					</a> <a href="/NewSys/download/excel/student?className=all"
+						id="upload_stu" class="shortcut"> <img
+						src="images/download.png" alt="" width="48" height="48">
+						下载所有学生表
+					</a><a href="admin_class_ma.html" class="shortcut"> <img
+						src="images/refurbish.png" alt="" width="48" height="48">
+						刷新页面
+					</a>
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				班级列表 <a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+
+				<table>
+					<tbody>
+					<thead>
+						<tr>
+							<th>班级</th>
+							<th>年级</th>
+							<th>本/专科</th>
+							<th>
+								<div class="choose-screening-input">
+									实习指导教师&nbsp;&nbsp;搜索:<input name="searchCity" type="text"
+										id="choose" placeholder="输入教师名查询" />
+									<button class="btn btn-default" type="button"
+										data-clipboard-action="copy" data-clipboard-target="#choose">复制教师账号</button>
+									<div class="auto-screening auto-hidden" id="autoScreening">
+									</div>
+								</div>
+							</th>
+						</tr>
+					</thead>
+					<tr>
+						<td name="classGrade"></td>
+						<td name="grade"></td>
+						<td name="education"></td>
+						<td name="filedTea"></td>
+					</tr>
+					<tr>
+						<td name="classGrade"></td>
+						<td name="grade"></td>
+						<td name="education"></td>
+						<td name="filedTea"></td>
+					</tr>
+					<tr>
+						<td name="classGrade"></td>
+						<td name="grade"></td>
+						<td name="education"></td>
+						<td name="filedTea"></td>
+					</tr>
+					<tr>
+						<td name="classGrade"></td>
+						<td name="grade"></td>
+						<td name="education"></td>
+						<td name="filedTea"></td>
+					</tr>
+					<tr>
+						<td name="classGrade"></td>
+						<td name="grade"></td>
+						<td name="education"></td>
+						<td name="filedTea"></td>
+					</tr>
+					<tr>
+						<td name="classGrade"></td>
+						<td name="grade"></td>
+						<td name="education"></td>
+						<td name="filedTea"></td>
+					</tr>
+					<tr>
+						<td name="classGrade"></td>
+						<td name="grade"></td>
+						<td name="education"></td>
+						<td name="filedTea"></td>
+					</tr>
+					<tr>
+						<td name="classGrade"></td>
+						<td name="grade"></td>
+						<td name="education"></td>
+						<td name="filedTea"></td>
+					</tr>
+					<tr>
+						<td name="classGrade"></td>
+						<td name="grade"></td>
+						<td name="education"></td>
+						<td name="filedTea"></td>
+					</tr>
+					<tr>
+						<td name="classGrade"></td>
+						<td name="grade"></td>
+						<td name="education"></td>
+						<td name="filedTea"></td>
+					</tr>
+					</tbody>
+				</table>
+				<div class="pagination" id="page">
+					<a href="javascript:void(0);" onclick="lastPage()" class="prev">«</a>
+					<a href="javascript:void(0);" onclick="nowPage(this.id)"
+						id="start1" class="current">1</a> <a
+						href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+						class="next">»</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="js/clipboard.min.js"></script>
+	<script>
+		var arr = [];
+		$.ajax({
+			url : '/NewSys/teacher/all',
+			type : 'GET',
+			timeout : 5000, //超时时间
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success == true) {
+					for (var i = 0; i < data.data.length; i++) {
+						arr[i] = data.data[i].teaName;
+					}
+				} else {
+				}
+			}
+		});
+		$("#choose").bind('input propertychange', function() {
+			/*获得教师列表*/
+			/*这个是全部数据的数组*/
+			//var arr = [ '七里香', '你好', '报读', '你好啊', '你真好啊', '你在哪', '去哪啊', 47, 7, 63, 8, 6, 9, 1, 37, 37, 35, 34, 36, 3, 38, 53, 62, 63, 53, 43, 23, 32, 13, 03 ];
+			/*这个数组我是防止出现重复的数据进行数据去重复后的新数组*/
+			var arrNew = [];
+			var i;
+			for (i = 0; i < arr.length; i++) {
+				var arrItems = arr[i];
+				/*判断元素是否存在于arrNew中，如果不存在则插入到arrNew的最后*/
+				if ($.inArray(arrItems, arrNew) == -1) {
+					arrNew.push(arrItems);
+				/*console.log(arrNew);*/
+				}
+			}
+			/*这是将input中输入的数据有关联的全部加入新生成的div中显示出来*/
+			for (i = 0; i < arrNew.length; i++) {
+				var arrWord = arrNew[i].toString();
+				/*console.log(arrWord);*/
+				if (((arrWord.indexOf($('#choose').val())) > -1) && ($('#choose').val().length > 0)) {
+					var addArrWord = "<div class=auto-screening-prompt>" + arrWord + "</div>";
+					$("#autoScreening").append(addArrWord);
+					$("#autoScreening").removeClass("auto-hidden");
+				}
+			}
+			/*将显示出来的div的内容去重复，input内容变动时去重复*/
+			$(".auto-screening-prompt").each(function() {
+				if ($(this).text().indexOf($('#choose').val()) < 0) {
+					$(this).remove();
+				} else if ($('#choose').val().length == 0) {
+					$("#autoScreening").addClass("auto-hidden");
+					$(".auto-screening-prompt").remove();
+				}
+			});
+			/*弹出的提示div去重复*/
+			$(".auto-screening-prompt").each(function(i, iText) {
+				var iTextHtml = iText.innerHTML;
+				$(".auto-screening-prompt").each(function(j, jText) {
+					var jTextHtml = jText.innerHTML;
+					if (i < j && iTextHtml == jTextHtml) {
+						$(this).remove();
+					}
+				});
+			});
+			/*点击div获取文本传值*/
+			$(".auto-screening-prompt").click(function() {
+				$("#choose").val($(this).text());
+				$("#autoScreening").addClass("auto-hidden");
+				$(".auto-screening-prompt").remove();
+			});
+		});
+	</script>
+	<script type="text/javascript">
+	
+		function tip() {
+			var tip = "文字已复制到剪贴板中";
+			ZENG.msgbox.show(tip, 4, 2000);
+		}
+		var clipboard = new Clipboard('.btn');
+	
+		clipboard.on('success', function(e) {
+			tip();
+			console.log(e);
+		});
+	
+		clipboard.on('error', function(e) {
+			console.log(e);
+		});
+	</script>
+</body>
+</html>

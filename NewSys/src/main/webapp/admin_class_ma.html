@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/admin_class_ma.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-2" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_class_ma.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-2" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_class_ma.html">
+		<h1>
+			<img src="images/posts.png" alt="">班级管理
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="admin_class_ma_edit.html"
+						class="shortcut zoombox w500 h300"> <img
+						src="images/glyph-add.png" alt="" width="48" height="48">
+						添加班级
+					</a> <a href="/NewSys/download/excel/student?className=all"
+						id="upload_stu" class="shortcut"> <img
+						src="images/download.png" alt="" width="48" height="48">
+						下载所有学生表
+					</a><a href="admin_class_ma.html" class="shortcut"> <img
+						src="images/refurbish.png" alt="" width="48" height="48">
+						刷新页面
+					</a>
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				班级列表 <a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+				<table>
+					<thead>
+						<tr>
+							<th>班级名称</th>
+							<th>年级</th>
+							<th>专业</th>
+							<th>本/专科</th>
+							<th>人数</th>
+							<th>查看学生</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td name="className"></td>
+							<td name="grade"></td>
+							<td name="major"></td>
+							<td name="education"></td>
+							<td name="stuNum"></td>
+							<td><a name="seeUrl" href="admin_class_student.html">查看学生</a></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+						</tr>
+						<tr>
+							<td name="className"></td>
+							<td name="grade"></td>
+							<td name="major"></td>
+							<td name="education"></td>
+							<td name="stuNum"></td>
+							<td><a name="seeUrl" href="admin_class_student.html">查看学生</a></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+						</tr>
+						<tr>
+							<td name="className"></td>
+							<td name="grade"></td>
+							<td name="major"></td>
+							<td name="education"></td>
+							<td name="stuNum"></td>
+							<td><a name="seeUrl" href="admin_class_student.html">查看学生</a></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+						</tr>
+						<tr>
+							<td name="className"></td>
+							<td name="grade"></td>
+							<td name="major"></td>
+							<td name="education"></td>
+							<td name="stuNum"></td>
+							<td><a name="seeUrl" href="admin_class_student.html">查看学生</a></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+						</tr>
+						<tr>
+							<td name="className"></td>
+							<td name="grade"></td>
+							<td name="major"></td>
+							<td name="education"></td>
+							<td name="stuNum"></td>
+							<td><a name="seeUrl" href="admin_class_student.html">查看学生</a></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+						</tr>
+						<tr>
+							<td name="className"></td>
+							<td name="grade"></td>
+							<td name="major"></td>
+							<td name="education"></td>
+							<td name="stuNum"></td>
+							<td><a name="seeUrl" href="admin_class_student.html">查看学生</a></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+						</tr>
+						<tr>
+							<td name="className"></td>
+							<td name="grade"></td>
+							<td name="major"></td>
+							<td name="education"></td>
+							<td name="stuNum"></td>
+							<td><a name="seeUrl" href="admin_class_student.html">查看学生</a></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+						</tr>
+						<tr>
+							<td name="className"></td>
+							<td name="grade"></td>
+							<td name="major"></td>
+							<td name="education"></td>
+							<td name="stuNum"></td>
+							<td><a name="seeUrl" href="admin_class_student.html">查看学生</a></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+						</tr>
+						<tr>
+							<td name="className"></td>
+							<td name="grade"></td>
+							<td name="major"></td>
+							<td name="education"></td>
+							<td name="stuNum"></td>
+							<td><a name="seeUrl" href="admin_class_student.html">查看学生</a></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+						</tr>
+						<tr>
+							<td name="className"></td>
+							<td name="grade"></td>
+							<td name="major"></td>
+							<td name="education"></td>
+							<td name="stuNum"></td>
+							<td><a name="seeUrl" href="admin_class_student.html">查看学生</a></td>
+							<td><a name="updUrl" href="admin_class_ma_upd.html"
+								class="shortcutUpd zoombox w500 h300" title="修改"><img
+									src="images/edit.png" alt=""></a><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+						</tr>
+
+					</tbody>
+				</table>
+				<div class="pagination" id="page">
+					<a href="javascript:void(0);" onclick="lastPage()" class="prev">«</a>
+					<a href="javascript:void(0);" onclick="nowPage(this.id)"
+						id="start1" class="current">1</a> <a
+						href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+						class="next">»</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<script type="text/javascript">
+	if (getQueryString("nowPage") == null) {
+		createData(1);
+	} else {
+		createData(getQueryString("nowPage"));
+	}
+</script>
+<br>
+</html>

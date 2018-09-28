@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+<link rel="stylesheet" href="css/style2.css">
+
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-77" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_report_ma.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-77" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_report_ma.html">
+		<h1>
+			<img src="images/posts.png" alt="">说明文撰写
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="student_report_ma.html" class="shortcut"> <img
+						src="images/refurbish.png" alt="" width="48" height="48">
+						刷新页面
+					</a>
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				<a href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+				<table>
+					<thead>
+						<tr>
+							<th>阶段名</th>
+							<th>开始时间</th>
+							<th>结束时间</th>
+							<th>提交状态</th>
+							<th>填写/查看</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="state"></td>
+							<td><a name="seeUrl" href="student_report.html">填写/查看</a></td>
+						</tr>
+
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="state"></td>
+							<td><a name="seeUrl" href="student_report.html">填写/查看</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="state"></td>
+							<td><a name="seeUrl" href="student_report.html">填写/查看</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="state"></td>
+							<td><a name="seeUrl" href="student_report.html">填写/查看</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="state"></td>
+							<td><a name="seeUrl" href="student_report.html">填写/查看</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="state"></td>
+							<td><a name="seeUrl" href="student_report.html">填写/查看</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="state"></td>
+							<td><a name="seeUrl" href="student_report.html">填写/查看</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="state"></td>
+							<td><a name="seeUrl" href="student_report.html">填写/查看</a></td>
+						</tr>
+						<tr>
+							<td name="stageName"></td>
+							<td name="startDate"></td>
+							<td name="endDate"></td>
+							<td name="state"></td>
+							<td><a name="seeUrl" href="student_report.html">填写/查看</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="pagination" id="page">
+					<a href="javascript:void(0);" onclick="lastPage()" class="prev">«</a>
+					<a href="javascript:void(0);" onclick="nowPage(this.id)"
+						id="start1" class="current">1</a> <a
+						href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+						class="next">»</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+
+</body>
+
+<script type="text/javascript">
+
+	function createData() {
+		$.ajax({
+			url : '/NewSys/ds/sel/stu',
+			type : 'GET', //GET
+			timeout : 5000, //超时时间
+			data:"type=1",
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success == true) {
+					var stageList = data.data.stageList;
+					var stageNameNodes = document.getElementsByName("stageName");
+					var startDateNodes = document.getElementsByName("startDate");
+					var endDateNodes = document.getElementsByName("endDate");
+					var stateNodes = document.getElementsByName("state");
+					var seeUrlNodes = document.getElementsByName("seeUrl");
+					for (var i = 0; i < 10; i++) {
+						if (i < stageList.length) {
+							stageNameNodes[i].innerHTML = stageList[i].stageName;
+							startDateNodes[i].innerHTML = stageList[i].sd;
+							endDateNodes[i].innerHTML = stageList[i].ed;
+							stateNodes[i].innerHTML = stageList[i].state;
+							seeUrlNodes[i].href = "student_report.html?stageName=" + stageList[i].stageName;
+						} else {
+							stageNameNodes[i].innerHTML = "";
+							startDateNodes[i].innerHTML = "";
+							endDateNodes[i].innerHTML = "";
+							stateNodes[i].innerHTML = "";
+							seeUrlNodes[i].href = "";
+						}
+					}
+
+				}
+			}
+		});
+	}
+	createData();
+</script>
+
+</html>

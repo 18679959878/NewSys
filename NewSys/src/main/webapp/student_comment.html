@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+v
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+<link rel="stylesheet" href="css/tip.css" />
+<link rel="stylesheet" href="css/sumbitButton.css">
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/msgbox.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-58" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_comment.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-58" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_comment.html">
+		<h1>
+			<img src="images/posts.png" alt="">毕业设计教师指导评语
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="admin_class_ma.html" class="shortcut"> <img
+						src="images/refurbish.png" alt="" width="48" height="48">
+						刷新页面
+					</a>
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				班级列表 <a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+
+				<div style="height: 50px;">
+					<h2>毕业设计指导老师意见</h2>
+				</div>
+				<div id="at_promis">
+					<table>
+						<tr>
+							<td>学号：<input type="text" class="stuId" name="stuId"
+								id="stuId" readonly="readonly" />
+							</td>
+							<td>姓名：<input type="text" class="stuName" name="stuName"
+								id="stuName" readonly="readonly" />
+							</td>
+							<td>班级：<input type="text" class="className" name="className"
+								id="className" readonly="readonly" />
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div id="comment">
+					<p>评语内容（对作品基本内容的评价、作品（价值、创新性）评价；所使用的技术方法是否合理；工作量是否足够；作品的效果评价；方案是否可行、作品存在的问题、答辩表现）</p>
+					<p>1、</p>
+					<br> <br>
+					<p>2、</p>
+					<br> <br>
+					<p>3、</p>
+					<br> <br>
+					<p>4、</p>
+					<br> <br>
+					<p>5、</p>
+				</div>
+				<div style="height: 40px;">
+					<p style="margin-left: 72%; font-size: 16px;">
+						&nbsp;&nbsp;&nbsp;<span id="other_error" style="color: red;"></span>
+					</p>
+				</div>
+
+				<div id="b_div" style="height: 65px;">
+					<button onclick="tip()">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+
+<script type="text/javascript">
+	var E = window.wangEditor
+	var comment = new E('#comment');
+
+	comment.customConfig.menus = [
+		'fontSize',
+		'list',
+		'justify',
+		'undo',
+		'redo',
+	]
+
+	comment.create();
+	comment.$textElem.attr('contenteditable', false);
+	function createData() {
+		$.ajax({
+			url : "/NewSys/comment/sel",
+			type : 'GET',
+			timeout : 5000, //超时时间
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success) {
+					comment.txt.html(data.data.comment);
+					$(".stuId").val(data.data.stuId);
+					$(".stuName").val(data.data.stuName);
+					$(".className").val(data.data.className);
+				}
+			}
+		});
+	}
+
+	createData();
+</script>
+
+<br>
+</html>
+

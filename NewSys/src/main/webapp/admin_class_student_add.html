@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>后台管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.js"></script>
+<script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<link rel="stylesheet" type="text/css" href="css/demo.css">
+<link rel="stylesheet" type="text/css" href="css/pretty.min.css">
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body class="modal white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-6" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_class_student_add.html">
+
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-6" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_class_student_add.html">
+		<!--
+
+-->
+		<div class="bloc">
+			<div class="title">
+				添加班级信息<a class="toggle"></a>
+			</div>
+			<form action="/NewSys/student/add" method="post" class="addStudent">
+				<div class="content" style="height:540px;">
+					<div class="sec_error_box"></div>
+					<div class="prompt">带有*号的项为非必填项，可以忽略不填</div>
+					<div class="input">
+						<label for="file">学号</label> <input type="text" id="stuId"
+							name="stuId" nullmsg="学号不能为空！" datatype="n8-8"
+							errormsg="学号应该为8位！" sucmsg="学号验证通过！">
+					</div>
+					<div class="input">
+						<label for="file">姓名</label> <input type="text" id="stuName"
+							name="stuName" nullmsg="姓名不能为空！" datatype="*" errormsg="姓名不能为空！"
+							sucmsg="姓名验证通过！">
+					</div>
+					<div class="input">
+						<label for="file">班级名称(不可修改)</label> <input type="text"
+							id="className" name="className" readonly="readonly">
+					</div>
+					<div class="input">
+						<label for="file">密码*</label> <input type="text" id="password"
+							name="password">
+					</div>
+					<div class="input">
+						<label for="file">邮箱*</label> <input type="text" id="email"
+							name="email">
+					</div>
+					<div class="input">
+						<label for="file">毕业设计指导老师*</label> <input type="text"
+							id="worksTea" name="worksTea">
+					</div>
+					<div class="input">
+						<label for="file">实习期指导老师*</label> <input type="text"
+							id="fieldworkTea" name="fieldworkTea">
+					</div>
+					<div class="submit">
+						<input type="submit" value="确定">
+
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<br>
+
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<br>
+<script type="text/javascript">
+	document.getElementById("className").value = getQueryString("className");
+	$(".addStudent").Validform({
+		tiptype : function(msg, o, cssctl) {
+			var objtip = $(".sec_error_box");
+			cssctl(objtip, o.type);
+			objtip.text(msg);
+		},
+		ajaxPost : true,
+		beforeSubmit : function(curform) {
+			return true;
+		},
+		callback : function(data) {
+			if (data.success == true) {
+				var objtip = $(".sec_error_box");
+				objtip.text("添加成功");
+			//			window.location.href = "/GraduateSystem/admin.html"
+			} else {
+				var objtip = $(".sec_error_box");
+				objtip.text(data.error);
+			}
+		}
+	});
+</script>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>文件域</title>
+<link rel="stylesheet" type="text/css" href="css/H-ui.css"></link>
+<link rel="stylesheet" href="css/style.css"></link>
+<link rel="stylesheet" href="css/style2.css"></link>
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css"></link>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<style type="text/css">
+.info {
+	width: 480px;
+	margin: 120px auto 0px auto;
+	line-height: 12px;
+	overflow: hidden
+}
+
+.message {
+	width: 480px;
+	margin: 120px auto 0px auto;
+	line-height: 12px;
+	overflow: hidden
+}
+
+.message .input {
+	width: 219px;
+	height: 28px;
+	line-height: 28px;
+	border: none;
+	background: #333333;
+	padding-left: 20px;
+	color: #ffffff;
+	font-family: Microsoft YaHei;
+}
+
+.message .liulan {
+	width: 64px;
+	height: 28px;
+	border: 1px solid #ffb660;
+	background: #fe9e19;
+	color: #ffffff;
+	cursor: pointer;
+}
+
+.message .files {
+	position: absolute;
+	left: -1000px;
+	top: 52px;
+	heigth: 26px;
+	cursor: pointer;
+	filter: Alpha(opacity = 0);
+	-moz-opacity: 0;
+	opacity: 0;
+}
+</style>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-110" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/upload.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-110" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/upload.html">
+		<h1>
+			<img src="images/posts.png" alt="">上传学生名单 
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="admin_teacher_ma.html" class="shortcut" id="back"> <img
+						src="images/callback.png" alt="" width="48" height="48">
+							返回上一页 </a><a href="upload.html" id="refurbish" class="shortcut">
+						<img src="images/refurbish.png" alt="" width="48" height="48">
+							刷新页面 
+					</a>&nbsp;已完成大小/总大小 :<font id="finishTotal" color="red"></font>&nbsp;&nbsp;&nbsp;速度
+					:<font id="velocity" color="red"></font> &nbsp;&nbsp;&nbsp;剩余时间 :<font
+						id="timeLeft" color="red"></font>&nbsp;&nbsp;&nbsp;<font
+						id="finish" color="green"></font>&nbsp;&nbsp;&nbsp;<font
+						id="analysis" color="green"></font>
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				班级列表 <a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+				<div class="message">
+					<h4>仅仅支持xls、xlsx格式的文件上传</h4>
+					<span>(请按照下载的模板上传，避免解析出错)</span>
+					<p style="height: 0px;"></p>
+					<form id="form1" name="form1" enctype="multipart/form-data"
+						onsubmit="return false;" role="form" class="form-inline">
+						<input type="text" id="txt" name="txt" class="input" value="文件域"
+							disabled="disabled" style="height:26px;" />&nbsp;<input
+							type="button"
+							onMouseMove="f.style.pixelLeft=event.x-60;f.style.pixelTop=this.offsetTop;"
+							value="文件选择" size="30" style="height:40px;"
+							onClick="fileObj.click()" id="choose" class="liulan"></input> <input
+							type="file" id="fileObj" name="fileObj"
+							onChange="txt.value=this.value" style="height:26px;"
+							class="files" size="1" hidefocus></input> <input type="hidden"
+							name="type" value="student_e" />
+						<!-- ajax上传成功后返回文件名，供你使用 -->
+						&nbsp; <input type="hidden" id="fileName" name="fileName"></input><input
+							type="button"
+							onMouseMove="f.style.pixelLeft=event.x-60;f.style.pixelTop=this.offsetTop;"
+							value="确认上传" size="30" style="height:40px;" id="upload"
+							class="liulan"></input> &nbsp;<input type="button"
+							onMouseMove="f.style.pixelLeft=event.x-60;f.style.pixelTop=this.offsetTop;"
+							value="取消上传" size="30" style="height:40px;" id="cancel"
+							class="liulan"></input>
+
+					</form>
+					<!-- 动画进度条 -->
+					<div id="pgID" style="display:block;width:300px;">
+						<div class="progress progress-striped active">
+							<div id="pdBar" class="progress-bar progress-bar-success"
+								role="progressbar" aria-valuenow="60" aria-valuemin="0"
+								aria-valuemax="100" style="width:0%;">
+								<span id="pdNum" class="sr-only">40% 完成</span>
+							</div>
+						</div>
+					</div>
+					<p></p>
+					<p></p>
+					<p></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var type = "";
+		if (getQueryString("type") == "0") {
+			document.getElementById("back").href = "admin_class_student.html?className=" + getQueryString("className") + "&nowPage=" + getQueryString("nowPage");
+			type = "student_e";
+		} else if (getQueryString("type") == "1") {
+			document.getElementById("back").href = "admin_teacher_ma.html?nowPage=" + getQueryString("nowPage");
+			type = "teacher_e";
+		}
+		var timeInfo = 0;
+		$(function() {
+			$("#upload").click(function() {
+				var path = $("#txt").val();
+				var ext = path.slice(path.lastIndexOf(".") + 1).toLowerCase();
+				if (ext == "xls" || ext == "xlsx") {
+					uploadFile();
+					timeInfo = setInterval("getUploadInfo()", 500);
+				} else {
+					alert("不支持此类型文件上传");
+				}
+			});
+	
+			$("#cancel").click(function() {
+				$("#pdBar").css({
+					"width" : "0%"
+				});
+				clearInterval(timeInfo);
+			});
+	
+		});
+	
+		//文件上传
+		function uploadFile() {
+			var fileObj = $("#fileObj")[0].files[0]; //必须这样写,否则取不到文件
+			//$('#form1').serialize() 无法序列化二进制文件，这里采用formData上传
+			//需要浏览器支持：Chrome 7+、Firefox 4+、IE 10+、Opera 12+、Safari 5+。
+			var formData = new FormData(); // FormData 对象
+			//      formData.append("author", "hooyes"); // 可以增加表单数据
+			formData.append("fileObj", fileObj); // 文件对象
+			$.ajax({
+				type : "POST",
+				url : "/NewSys/new/upload?type="+type,
+				data : formData,
+				async : true,
+				cache : false,
+				dataType : "json",
+				contentType : false, /*必须false才会自动加上正确的Content-Type */
+				processData : false, /*必须false才会避开jQuery对 formdata 的默认处理XMLHttpRequest会对 formdata 进行正确的处理*/
+				success : function(res) {
+					if (res.success == true) {
+						$("#analysis").text("解析成功");
+						stop = true;
+						clearInterval(timeInfo);
+						getUploadInfo(); //修正得到文件上传信息
+						setPdWidth(100); //修正文件上传为100%
+					} else {
+						$("#analysis").text("解析失败");
+						clearInterval(timeInfo);
+						//alert("ss" + res.error);
+					}
+				},
+				error : function() {
+					clearInterval(timeInfo);
+					alert("上传错误!");
+				}
+			});
+	
+		}
+	
+		//打开进度条
+		function openProgess() {
+			$("#pgID").css({
+				"display" : "block",
+				"width" : "300px"
+			});
+		}
+	
+		//关闭进度条
+		function closeProgess() {
+			$("#pgID").css({
+				"display" : "none",
+				"width" : "300px"
+			});
+			$("#pdBar").css({
+				"width" : "0%"
+			});
+		}
+	
+		//得到上传文件进度信息
+		function getUploadInfo() {
+			var num = 0
+			$.ajax({
+				url : "/NewSys/new/getInfo",
+				data : {
+					time : new Date()
+				},
+				type : "post",
+				dataType : "json",
+				cache : false,
+				success : function(res) {
+	
+					//alert("获得进度");
+					if (res.percent == 100) {
+						$("#finish").text("上传成功");
+						if (num == 0) {
+							$("#finishTotal").text(res.totalLength + "kb/" + res.length + "kb");
+							$("#velocity").text(res.velocity + "kb/s");
+							$("#timeLeft").text(res.timeLeft);
+							//							$("#time").text("上传速度太快，没记录到数据！！┑(￣Д ￣)┍");
+							//							$("#velocity").text("上传速度太快，没记录到数据！！┑(￣Д ￣)┍");
+							//							$("#totalTime").text("上传速度太快，没记录到数据！！┑(￣Д ￣)┍");
+							//							$("#timeLeft").text("上传速度太快，没记录到数据！！┑(￣Д ￣)┍");
+							//							$("#percent").text("上传速度太快，没记录到数据！！┑(￣Д ￣)┍");
+							//							$("#length").text("上传速度太快，没记录到数据！！┑(￣Д ￣)┍");
+							//							$("#totalLength").text("上传速度太快，没记录到数据！！┑(￣Д ￣)┍");
+							//$("#startTime").text(new Date(res.startTime));
+							//$("#currentTime").text(new Date(res.currentTime));
+							//$("#time").text(res.time);
+							//$("#velocity").text(res.velocity);
+							//$("#totalTime").text(res.totalTime);
+							//$("#timeLeft").text(res.timeLeft);
+							//$("#percent").text(res.percent);
+							//$("#length").text(res.length);
+							//$("#totalLength").text(res.totalLength);
+							return;
+						} else {
+							clearInterval(timeInfo);
+							return;
+						}
+					}
+					setPdWidth(res.percent);
+					setUploadInfo(res);
+					num++;
+				},
+				error : function() {
+					clearInterval(timeInfo);
+					console.log("得到上传文件信息出错!");
+				}
+			});
+		}
+	
+		//设置上传文件进度信息
+		function setUploadInfo(res) {
+			$("#finishTotal").text(res.totalLength + "kb/" + res.length + "kb");
+			$("#velocity").text(res.velocity + "kb/s");
+			$("#timeLeft").text(res.timeLeft);
+		//	$("#startTime").text(new Date(res.startTime));
+		//	$("#currentTime").text(new Date(res.currentTime));
+		//	$("#time").text(res.time);
+		//	$("#velocity").text(res.velocity);
+		//	$("#totalTime").text(res.totalTime);
+		//	$("#timeLeft").text(res.timeLeft);
+		//	$("#percent").text(res.percent);
+		//$("#length").text(res.length);
+		//	$("#totalLength").text(res.totalLength);
+		}
+	
+		function setPdWidth(percent) {
+			//alert("测试set");
+			$("#pdBar").css({
+				"width" : percent + "%"
+			});
+		}
+	
+		$("#choose").click(function() {
+			$("#pdBar").css({
+				"width" : 0 + "%"
+			});
+			$("#finishTotal").text("");
+			$("#velocity").text("");
+			$("#timeLeft").text("");
+		//$("#startTime").text("");
+		//$("#currentTime").text("");
+		//$("#time").text("");
+		//$("#velocity").text("");
+		//$("#totalTime").text("");
+		//$("#timeLeft").text("");
+		//$("#percent").text("");
+		//$("#length").text("");
+		//$("#totalLength").text("");
+		});
+	</script>
+</html>

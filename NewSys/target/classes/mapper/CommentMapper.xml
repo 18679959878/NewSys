@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.CommentMapper">
+	<resultMap type="com.sys.entity.Comment" id="CommentResult">
+		<id column="stuId" jdbcType="VARCHAR" property="stuId"></id>
+		<result column="stuName" jdbcType="VARCHAR" property="stuName"></result>
+		<result column="className" jdbcType="VARCHAR" property="className"></result>
+		<result column="comment" jdbcType="VARCHAR" property="comment"></result>
+	</resultMap>
+	<select id="select" parameterType="String" resultMap="CommentResult">
+		SELECT
+		stuId,stuName,className,comment FROM
+		comment WHERE stuId=#{stuId}
+	</select>
+	<insert id="saveOrUpdate" parameterType="com.sys.entity.Comment">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			SELECT COUNT(*) FROM comment WHERE stuId = #{stuId} 
+		</selectKey>
+		<if test="count > 0">
+			UPDATE comment
+			SET comment = #{comment}
+			WHERE stuId = #{stuId} 
+		</if>
+		<if test="count==0">
+			INSERT INTO
+			comment(stuId,stuName,className,comment)
+			VALUES(#{stuId},#{stuName},#{className},#{comment})
+		</if>
+
+	</insert>
+</mapper>

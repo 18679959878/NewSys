@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+v
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+<link rel="stylesheet" href="css/tip.css" />
+<link rel="stylesheet" href="css/sumbitButton.css">
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/msgbox.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-68" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_filed_week_now.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-68" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_filed_week_now.html">
+		<h1>
+			<img src="images/posts.png" alt="">实习管理
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				实习管理 <a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+
+				<div style="height: 40px;">
+					<h2>实习活动</h2>
+				</div>
+				<div id="at_promis">
+					<form method="post" action="/NewSys/weekRecord/sop" id="add">
+						<table>
+							<tr>
+								<td>实习部门：<input type="text" id="department"
+									name="department" /></td>
+								<td>实习地点：<input type="text" id="place" name="place" /></td>
+							</tr>
+						</table>
+						<input id="stageName" name="stageName" hidden="hidden" />
+						<textarea id="activity_t" name="activity" hidden="hidden"></textarea>
+					</form>
+					<div id="activity"></div>
+				</div>
+				<div style="height: 40px;">
+					<p style="margin-left: 72%; font-size: 16px;">
+						字数限制400-500&nbsp;&nbsp;&nbsp;<span id="ac_error"
+							style="color: red;"></span>
+					</p>
+				</div>
+				<div style="height: 50px;">
+					<h2>指导老师意见</h2>
+				</div>
+				<div id="tea_opinion"></div>
+				<div style="height: 40px;">
+					<p style="margin-left: 72%; font-size: 16px;">
+						字数限制280-340&nbsp;&nbsp;&nbsp;<span id="op_error"
+							style="color: red;"></span>
+					</p>
+				</div>
+				<div id="b_div" style="height: 65px;">
+					<button onclick="tip()">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<script type="text/javascript">	
+	document.getElementById("stageName").value = getQueryString("stageName");
+</script>
+<script type="text/javascript">
+	var lastAcNum = 0;
+	var lastOpNum = 0;
+	var E = window.wangEditor
+	var activity = new E('#activity')
+	activity.customConfig.onchange = function(html) {
+		var length = removeHTMLTag(html).length;
+		if (length > 500) {
+			$("#ac_error").css("color", "red");
+			$("#ac_error").html(length + "/500(超出字数限制)");
+		} else if (length < 400) {
+			$("#ac_error").css("color", "red");
+			$("#ac_error").html(length + "/500(字数不足)");
+		} else {
+			$("#ac_error").css("color", "green");
+			$("#ac_error").html(length + "/500(字数限制内)");
+		}
+		if (length <= 500 && (length - lastAcNum >= 20) || (length - lastAcNum <= -20)) {
+			lastAcNum = length;
+			tip();
+		}
+	}
+	activity.customConfig.menus = [
+		'fontSize',
+		'list',
+		'justify',
+		'undo',
+		'redo',
+	]
+
+	activity.create();
+	var E = window.wangEditor
+	var tea_opinion = new E('#tea_opinion');
+	tea_opinion.customConfig.menus = []
+
+	tea_opinion.create();
+	tea_opinion.$textElem.attr('contenteditable', false);
+	function removeHTMLTag(str) {
+		str = str.replace(/<\/?[^>]*>/g, ''); //去除HTML tag
+		str = str.replace(/[ | ]*\n/g, '\n'); //去除行尾空白
+		str = str.replace(/&nbsp;/ig, ''); //去掉&nbsp;
+		return str;
+	}
+	function tip() {
+		$("#activity_t").val(activity.txt.html());
+		var targetUrl = $("#add").attr("action");
+		var sendData = $("#add").serialize();
+		if (removeHTMLTag(activity.txt.html()).length <= 800) {
+			$.ajax({
+				url : targetUrl,
+				type : 'POST', //POST
+				timeout : 5000, //超时时间
+				data : sendData,
+				dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+				success : function(data) {
+					if (data.success == true) {
+						var tip = "内容已保存";
+						ZENG.msgbox.show(tip, 4, 2000);
+						createData();
+					} else {
+						var tip = data.error;
+						ZENG.msgbox.show(tip, 5, 2000);
+					}
+				},
+				error : function(data) {
+					var tip = "内容保存失败";
+					ZENG.msgbox.show(tip, 5, 2000);
+				}
+			});
+		} else {
+			var tip = "字数超过2400字限制,内容保存失败";
+			ZENG.msgbox.show(tip, 5, 2000);
+		}
+	}
+	function createData() {
+		$.ajax({
+			url : "/NewSys/weekRecord/sel",
+			type : 'GET',
+			data : "stageName=" + getQueryString("stageName"),
+			timeout : 5000, //超时时间
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success) {
+					activity.txt.html(data.data.activity);
+					$("#department").val(data.data.department);
+					$("#place").val(data.data.place);
+					$("#tea_opinion").VAL(data.data.guidance);
+				}
+			}
+		});
+
+	}
+	createData();
+</script>
+
+</html>

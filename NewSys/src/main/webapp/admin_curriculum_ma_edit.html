@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>后台管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.js"></script>
+<script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="js/stuYear.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<link rel="stylesheet" type="text/css" href="css/demo.css">
+<link rel="stylesheet" type="text/css" href="css/pretty.min.css">
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body class="modal white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-11" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_curriculum_ma_edit.html">
+
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-11" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_curriculum_ma_edit.html">
+		<!--
+
+-->
+		<div class="bloc">
+			<div class="title">
+				新增班级<a class="toggle"></a>
+			</div>
+			<form action="/NewSys/curriculum/save" method="post"
+				class="addCurriculums">
+				<div class="content" style="height:330px;">
+					<div class="sec_error_box"></div>
+					<div class="input">
+						<label for="file">课程名</label> <input type="text" id="couName"
+							name="couName">
+					</div>
+					<div class="input">
+						<label for="file">开课班级</label> <input type="text" id="className"
+							name="className">
+					</div>
+
+					<div class="input">
+						<label for="file">授课教师</label><input type="text" id="teaAccount"
+							name="teaAccount" />
+					</div>
+					<div class="input">
+						<label for="file">学年</label> <select id="stuYear" name="stuYear"><option
+								selected="selected">测试</option></select>
+					</div>
+					<div class="submit">
+						<input type="submit" value="确定">
+
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<br>
+
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<br>
+
+<script type="text/javascript">
+	var now = new Date();
+	var nowYear = now.getFullYear();
+	var nowMonth = now.getMonth() + 1;
+	var nowStyYear;
+	if (nowMonth < 10 && nowMonth != 1 && nowMonth != 2 && nowMonth != 3) {
+		nowStyYear = (nowYear - 1) + "-" + nowYear + "-2";
+	} else {
+		nowStyYear = (nowYear) + "-" + (nowYear + 1) + "-1";
+	}
+	var stuYears = createStuYear();
+	var options = "";
+	for (var i = 0; i < stuYears.length; i++) {
+		if (stuYears[i] == nowStyYear) {
+			options += "<option selected='selected'>" + stuYears[i] + "</option>";
+		} else {
+			options += "<option >" + stuYears[i] + "</option>";
+		}
+	}
+	document.getElementById("stuYear").innerHTML = options;
+	$(".addCurriculums").Validform({
+		tiptype : function(msg, o, cssctl) {
+			var objtip = $(".sec_error_box");
+			cssctl(objtip, o.type);
+			objtip.text(msg);
+		},
+		ajaxPost : true,
+		beforeSubmit : function(curform) {
+			return true;
+		},
+		callback : function(data) {
+			if (data.success == true) {
+				var objtip = $(".sec_error_box");
+				objtip.text("添加成功");
+			//			window.location.href = "/GraduateSystem/admin.html"
+			} else {
+				var objtip = $(".sec_error_box");
+				objtip.text(data.error);
+			}
+		}
+	});
+</script>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+<link rel="stylesheet" href="css/tip.css" />
+<link rel="stylesheet" href="css/sumbitButton.css">
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/msgbox.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script type="text/javascript" src="js/inputmail.js"></script>
+<style type="text/css">
+form {
+	max-width: 640px;
+	width: 100%;
+	margin: 24px auto;
+	font-size: 28px;
+}
+
+label {
+	display: block;
+	margin: 10px 10px 15px;
+	font-size: 24px;
+}
+
+input {
+	display: block;
+	width: 100%;
+	height: 40px;
+	font-size: 22px;
+	margin-top: 10px;
+	padding: 6px 10px;
+	color: #333;
+	border: 1px solid #CCC;
+	box-sizing: border-box;
+}
+
+meter, progress {
+	display: block;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.btn {
+	margin-top: 30px;
+}
+
+.btn input {
+	color: #FFF;
+	background-color: green;
+	border: 0 none;
+	outline: none;
+	cursor: pointer;
+}
+</style>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-71" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_info.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-71" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_info.html">
+		<h1>
+			<img src="images/posts.png" alt="">绑定邮箱
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="admin_class_ma.html" class="shortcut"> <img
+						src="images/refurbish.png" alt="" width="48" height="48">
+						刷新页面
+					</a>
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				绑定邮箱<a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+				<form action="">
+					<fieldset>
+						<legend>个人资料</legend>
+						<label for=""> 姓名: <input type="text" id="stuName"
+							required autofocus value="" readonly="readonly" />
+						</label> <label for=""> 学号: <input type="text" id="stuId" required
+							autofocus value="" readonly="readonly" />
+						</label> <label for=""> 班级: <input type="text" id="grade" required
+							autofocus value="" readonly="readonly" />
+						</label> <label for=""> 专业: <input type="text" id="education"
+							required autofocus value="" readonly="readonly" />
+						</label><label for=""> 毕业设计指导老师: <input type="text"
+							id="fieldworkTea" required autofocus value="" readonly="readonly" /></label>
+						<label for=""> 实习期指导老师: <input type="text" id="worksTea"
+							required autofocus value="" readonly="readonly" />
+						</label><label></label> <label for=""> 邮箱地址: <input type="email"
+							value="" id="email" readonly="readonly" />
+						</label> <label for=""> 选择方向: <input type="text" id="director"
+							required autofocus value="暂无内容" readonly="readonly" />
+						</label>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<script type="text/javascript">
+	function createData() {
+		$.ajax({
+			url : "/NewSys/student/myInfo",
+			type : 'GET',
+			timeout : 5000, //超时时间
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success) {
+					if (data.data.stuName != "") {
+						$("#stuName").val(data.data.stuName);
+					} else {
+						$("#stuName").val("暂无数据");
+					}
+					if (data.data.stuId != "") {
+						$("#stuId").val(data.data.stuId);
+					} else {
+						$("#stuId").val("暂无数据");
+					}
+					if (data.data.className != "") {
+						$("#grade").val(data.data.className);
+					} else {
+						$("#grade").val("暂无数据");
+					}
+					if (data.data.education != "") {
+						$("#education").val(data.data.education);
+					} else {
+						$("#education").val("暂无数据");
+					}
+					if (data.data.fieldworkTea != "") {
+						$("#fieldworkTea").val(data.data.fieldworkTea);
+					} else {
+						$("#fieldworkTea").val("暂无数据");
+					}
+					if (data.data.worksTea != "") {
+						$("#worksTea").val(data.data.worksTea);
+					} else {
+						$("#worksTea").val("暂无数据");
+					}
+					if (data.data.email != "") {
+						$("#email").val(data.data.email);
+					} else {
+						$("#email").val("暂无数据");
+					}
+				}
+			}
+		});
+	}
+	createData();
+</script>
+<br>
+</html>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.CurriculumMapper">
+	<resultMap type="com.sys.entity.Curriculum" id="CurriculumResult">
+		<id column="teaAccount" jdbcType="VARCHAR" property="teaAccount"></id>
+		<id column="couName" jdbcType="VARCHAR" property="couName"></id>
+		<id column="className" jdbcType="VARCHAR" property="className"></id>
+		<id column="stuYear" jdbcType="VARCHAR" property="stuYear"></id>
+		<result column="isSub" jdbcType="BOOLEAN" property="isSub" />
+		<result column="isLock" jdbcType="BOOLEAN" property="isLock" />
+	</resultMap>
+	<insert id="save" parameterType="com.sys.entity.Curriculum">
+		INSERT INTO
+		curriculum(teaAccount,couName,className,stuYear,isSub,isLock)
+		VALUES(#{teaAccount},#{couName},#{className},#{stuYear},#{isSub},#{isLock});
+	</insert>
+	<update id="update" parameterType="com.sys.entity.Curriculum">
+		UPDATE curriculum SET
+		isSub=#{isSub},isLock=#{isLock} WHERE teaAccount=#{teaAccount} AND
+		couName=#{couName} AND className=#{className} AND stuYear=#{stuYear}
+	</update>
+	<insert id="saveBatch" parameterType="com.sys.entity.Curriculum">
+		INSERT INTO
+		curriculum(teaAccount,couName,className,stuYear,isSub.isLock)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{teaAccount},#{couName},#{className},#{stuYear},#{isSub})
+		</foreach>
+	</insert>
+	<select id="selectOfteaAccount" parameterType="String"
+		resultMap="CurriculumResult">
+		SELECT
+		teaAccount,couName,className,stuYear,isSub,isLock FROM
+		curriculum
+		WHERE
+		teaAccount=#{teaAccount}
+	</select>
+	<select id="selectOfCouName" parameterType="String" resultMap="CurriculumResult">
+		SELECT
+		teaAccount,couName,className,stuYear,isSub,isLock FROM
+		curriculum WHERE
+		couName=#{couName}
+	</select>
+	<select id="selectOfClassName" parameterType="String" resultMap="CurriculumResult">
+		SELECT
+		teaAccount,couName,className,stuYear,isSub,isLock FROM
+		curriculum WHERE
+		className=#{className}
+	</select>
+	<select id="selectOfStuYear" parameterType="String" resultMap="CurriculumResult">
+		SELECT
+		teaAccount,couName,className,stuYear,isSub,isLock FROM
+		curriculum WHERE
+		stuYear=#{stuYear}
+	</select>
+	<select id="selectStuYearNums" parameterType="String"
+		resultType="Integer">
+		SELECT COUNT(*) FROM curriculum WHERE stuYear=#{stuYear}
+	</select>
+	<select id="selectStuYear" resultType="String">
+		SELECT DISTINCT stuYear
+		FROM
+		curriculum
+	</select>
+	<select id="selectStuYearOfTea" parameterType="String"
+		resultType="String">
+		SELECT DISTINCT stuYear
+		FROM
+		curriculum WHERE
+		teaAccount=#{teaAccount}
+	</select>
+	<select id="selectStuYearOfTeaAccountNums" parameterType="String"
+		resultType="Integer">
+		SELECT COUNT(*) FROM curriculum WHERE stuYear=#{stuYear}
+		AND teaAccount=#{teaAccount}
+	</select>
+	<select id="selectPageOfStuYear" resultMap="CurriculumResult"> SELECT
+		teaAccount,couName,className,stuYear,isSub,isLock FROM
+		curriculum WHERE
+		stuYear=#{stuYear} LIMIT #{start},#{end}
+	</select>
+	<select id="select" resultMap="CurriculumResult">
+		SELECT
+		teaAccount,couName,className,stuYear,isSub,isLock FROM
+		curriculum WHERE
+		stuYear=#{stuYear} AND couName=#{couName} AND className=#{className}
+	</select>
+	<select id="selectPageOfStuYearAndTea" resultMap="CurriculumResult">
+		SELECT
+		teaAccount,couName,className,stuYear,isSub,isLock FROM
+		curriculum WHERE
+		stuYear=#{stuYear} AND teaAccount=#{teaAccount} LIMIT #{start},#{end}
+	</select>
+	<delete id="delete">
+		DELETE FROM curriculum WHERE teaAccount=#{teaAccount}
+		AND couName =
+		#{couName} AND className=#{className} AND
+		stuYear=#{stuYear}
+	</delete>
+</mapper>

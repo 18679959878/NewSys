@@ -1,0 +1,325 @@
+@CHARSET "UTF-8";
+/*
+* field
+*/
+
+/* reset */
+
+.field{
+  --uiFieldPaddingTop: var(--fieldPaddingTop, 0px);
+  --uiFieldPaddingRight: var(--fieldPaddingRight, 0px);
+  --uiFieldPaddingBottom: var(--fieldPaddingBottom, 0px);
+  --uiFieldPaddingLeft: var(--fieldPaddingLeft, 0px);
+
+  --uiFieldBorderColor: var(--fieldBorderColor, transpatent);
+  --uiFieldBorderTop: var(--fieldBorderTop, 0px);
+  --uiFieldBorderRight: var(--fieldBorderRight, 0px);
+  --uiFieldBorderBottom: var(--fieldBorderBottom, 0px);
+  --uiFieldBorderLeft: var(--fieldBorderLeft, 0px);
+
+  --uiFieldBgColor: var(--fieldBgColor, transpatent);
+  --uiFieldPlaceholderColor: var(--fieldPlaceholderColor, #767676);
+  --uiFieldAnimationDuration: var(--fieldAnimationDuration, .3s);
+  --uiFieldFonstSize: var(--fieldFontSize, 16px);
+
+  position: relative;  
+}
+
+.field__input{
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--uiFieldBgColor);
+
+  /* for iOS */
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
+
+  border-style: solid;
+  border-color: var(--uiFieldBorderColor);
+
+  border-top-width: var(--uiFieldBorderTop);
+  border-right-width: var(--uiFieldBorderRight);
+  border-bottom-width: var(--uiFieldBorderBottom);
+  border-left-width: var(--uiFieldBorderLeft);
+
+  padding-top: var(--uiFieldPaddingTop);
+  padding-right: var(--uiFieldPaddingRight);
+  padding-bottom: var(--uiFieldPaddingBottom);
+  padding-left: var(--uiFieldPaddingLeft);
+
+  font-family: inherit;
+  font-size: 100%;
+  color: inherit;
+}
+
+.field__input::-webkit-input-placeholder{ 
+  color: var(--uiFieldPlaceholderColor);
+  opacity: 0;
+}
+
+.field__input::-moz-placeholder{ 
+  color: var(--uiFieldPlaceholderColor);
+  opacity: 0;
+}
+
+.field__input:focus{
+  outline: none;  
+}
+
+.field__input:focus::-webkit-input-placeholder{ 
+  -webkit-transition: opacity var(--uiFieldAnimationDuration) ease-out var(--uiFieldAnimationDuration); 
+  transition: opacity var(--uiFieldAnimationDuration) ease-out var(--uiFieldAnimationDuration);
+  opacity: 1;
+}
+
+.field__input:focus::-moz-placeholder{ 
+  -webkit-transition: opacity var(--uiFieldAnimationDuration) ease-out var(--uiFieldAnimationDuration); 
+  transition: opacity var(--uiFieldAnimationDuration) ease-out var(--uiFieldAnimationDuration);
+  opacity: 1;
+}
+
+.field__label{
+  position: absolute;
+  top: calc(0px + var(--uiFieldPaddingTop) + var(--uiFieldBorderTop));
+  left: calc(0px + var(--uiFieldPaddingLeft) + var(--uiFieldBorderLeft));
+
+  pointer-events: none;
+  font-size: .9em;
+
+  -webkit-transition: top var(--uiFieldAnimationDuration) cubic-bezier(0.9,-0.15, 0.1, 1.15), opacity var(--uiFieldAnimationDuration) ease-out;
+
+  transition: top var(--uiFieldAnimationDuration) cubic-bezier(0.9,-0.15, 0.1, 1.15), opacity var(--uiFieldAnimationDuration) ease-out;
+  will-change: top, opacity;
+}
+
+.field__input:not(:placeholder-shown) ~ .field__label{
+  opacity: 0;
+  top: calc(0px + var(--uiFieldPaddingTop) + var(--uiFieldBorderTop));
+}
+
+.field__input:focus ~ .field__label{
+  opacity: 1;
+  top: calc(-1 * calc(var(--uiFieldPaddingTop) + var(--uiFieldBorderTop) + 15px));
+}
+
+/* type1 */
+
+.field_type1{
+  --uiFieldPaddingTop: var(--fieldPaddingTop, 15px);
+  --uiFieldPaddingRight: var(--fieldPaddingRight, 15px);
+  --uiFieldPaddingBottom: var(--fieldPaddingBottom, 15px);
+  --uiFieldPaddingLeft: var(--fieldPaddingLeft, 15px);
+
+  --uiFieldBorderTop: var(--fieldBorderTop, 2px);
+  --uiFieldBorderRight: var(--fieldBorderRight, 2px);
+  --uiFieldBorderBottom: var(--fieldBorderBottom, 2px);
+  --uiFieldBorderLeft: var(--fieldBorderLeft, 2px);  
+}
+
+.field_type1 .field__input{  
+  -webkit-transition: border-color var(--uiFieldAnimationDuration) ease-out;  
+  transition: border-color var(--uiFieldAnimationDuration) ease-out;
+  will-change: border-color;
+}
+
+.field_type1 .field__input:focus{
+  --uiFieldBorderColor: var(--fieldBorderColorActive);
+}
+
+/* type 2 */
+
+.field_type2{
+  --uiFieldBorderBottom: var(--fieldBorderBottom, 2px);
+  --uiFieldPaddingTop: var(--fieldPaddingTop, 5px);
+  --uiFieldPaddingRight: var(--fieldPaddingRight, 15px);
+  --uiFieldPaddingBottom: var(--fieldPaddingBottom, 10px);
+  --uiFieldPaddingLeft: var(--fieldPaddingLeft, 15px);  
+}
+
+.field_type2 .field__line{
+  width: 0;
+  height: var(--uiFieldBorderBottom);
+  background-color: var(--fieldBorderColorActive);
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  will-change: width;
+  -webkit-transition: width var(--uiFieldAnimationDuration) ease-out;
+  transition: width var(--uiFieldAnimationDuration) ease-out;
+}
+
+.field_type2 .field__input:focus ~ .field__line{
+  width: 100%;
+}
+
+/* type 3 */
+
+.field_type3{
+  --uiFieldBorderBottom: var(--fieldBorderBottom, 2px);
+  --uiFieldPaddingTop: var(--fieldPaddingTop, 5px);
+  --uiFieldPaddingRight: var(--fieldPaddingRight, 15px);
+  --uiFieldPaddingBottom: var(--fieldPaddingBottom, 10px);
+  --uiFieldPaddingLeft: var(--fieldPaddingLeft, 15px);  
+}
+
+.field_type3 .field__line{
+  width: 100%;
+  height: var(--uiFieldBorderBottom);
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.field_type3 .field__line:before, .field_type3 .field__line:after{
+  content: "";
+  width: 0;
+  height: 100%;
+  background-color: var(--fieldBorderColorActive);
+
+  position: absolute;
+  bottom: 0;
+
+  will-change: width;
+  -webkit-transition: width var(--uiFieldAnimationDuration) ease-out;
+  transition: width var(--uiFieldAnimationDuration) ease-out;
+}
+
+.field_type3 .field__line:before{
+  left: 50%;
+}
+
+.field_type3 .field__line:after{
+  right: 50%;
+}
+
+.field_type3 .field__input:focus ~ .field__line:before,
+.field_type3 .field__input:focus ~ .field__line:after{
+  width: 50%;
+}
+
+/*
+* demo styles
+*/
+
+.field{
+  --fieldBorderColor: #000;
+  --fieldBorderColorActive: #32cd32;
+  --fieldPlaceholderColor: #000;
+  display: block;
+  color: #000;
+}
+
+.field_type1{
+
+}
+
+/*
+* demo page
+*/
+
+@media screen and (min-width: 768px){
+
+  html{
+    font-size: 62.5%;
+  }
+}
+
+@media screen and (max-width: 767px){
+
+  html{
+    font-size: 50%;
+  }
+}
+
+body{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Open Sans", "Ubuntu", "Fira Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.6rem;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;   
+  overflow-y: scroll;
+}
+
+a{
+  text-decoration: none;
+  color: #fff;
+}
+
+a:hover, a:focus{
+  text-decoration: underline;
+}
+
+.page{
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.page__demo{
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.main-container{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.page__container{
+  width: 80%;  
+  max-width: 600px;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+
+  text-align: center;
+  margin: auto;  
+}
+
+.page__section:not(:first-child){
+  margin-top: 7rem;
+}
+
+.footer{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-align: center;  
+  font-size: 1.4rem;
+}
+
+@media screen and (min-width: 641px){
+
+  .footer__container{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+
+  .melnik909{
+    margin-left: 2rem;
+  }  
+}
+
+@media screen and (max-width: 640px){
+
+  .melnik909{
+    display: none;
+  } 
+}

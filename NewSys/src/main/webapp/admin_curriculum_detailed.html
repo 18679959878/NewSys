@@ -1,0 +1,477 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+<link rel="stylesheet" href="css/tip.css" />
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/msgbox.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-9" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_curriculum_detailed.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-9" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_curriculum_detailed.html">
+		<h1>
+			<img src="images/posts.png" alt="">课程管理
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="admin_curriculum_ma_edit.html"
+						class="shortcut zoombox w500 h300"> <img
+						src="images/glyph-add.png" alt="" width="48" height="48">
+						添加课程
+					</a>
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				课程列表 <a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a> <input type="text" id="search"
+					placeholder="输入教师名、课程名、班级名,按下回车进行搜索"
+					style="margin-left: 45%; width: 300px;"
+					onkeypress='if(event.keyCode==13) search();' /><input type="submit"
+					value="一键锁定" onclick="lockAll()" style="margin-left: 2%;" /> <input
+					type="submit" value="一键解锁" onclick="unLockAll()"
+					style="margin-left: 2%;" /> <input type=submit " value="删除所有"
+					onclick="deleteAll()" style="margin-left: 2%;">
+			</div>
+			<div class="content">
+				<table>
+					<thead>
+						<tr>
+							<th>学年</th>
+							<th>课程名</th>
+							<th>开课班级</th>
+							<th>授课教师</th>
+							<th>成绩提交状况</th>
+							<th>锁定/解锁</th>
+							<th>操作</th>
+							<th>查看成绩</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couName"></td>
+							<td name="className"></td>
+							<td name="teaAccount"></td>
+							<td name="subSituation"></td>
+							<td><input name="lock" type="submit" value="锁定"
+								onclick="lock(this.id,this.value)" /></td>
+							<td name="operation"><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+							<td><a name="seeUrl" class="zoombox w680 h900"
+								href="admin_class_score.html">[查看/录入]</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couName"></td>
+							<td name="className"></td>
+							<td name="teaAccount"></td>
+							<td name="subSituation"></td>
+							<td><input name="lock" type="submit" value="锁定"
+								onclick="lock(this.id,this.value)" /></td>
+							<td name="operation"><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+							<td><a name="seeUrl" class="zoombox w680 h900"
+								href="admin_class_score.html">[查看/录入]</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couName"></td>
+							<td name="className"></td>
+							<td name="teaAccount"></td>
+							<td name="subSituation"></td>
+							<td><input name="lock" type="submit" value="锁定"
+								onclick="lock(this.id,this.value)" /></td>
+							<td name="operation"><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+							<td><a name="seeUrl" class="zoombox w680 h900"
+								href="admin_class_score.html">[查看/录入]</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couName"></td>
+							<td name="className"></td>
+							<td name="teaAccount"></td>
+							<td name="subSituation"></td>
+							<td><input name="lock" type="submit" value="锁定"
+								onclick="lock(this.id,this.value)" /></td>
+							<td name="operation"><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+							<td><a name="seeUrl" class="zoombox w680 h900"
+								href="admin_class_score.html">[查看/录入]</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couName"></td>
+							<td name="className"></td>
+							<td name="teaAccount"></td>
+							<td name="subSituation"></td>
+							<td><input name="lock" type="submit" value="锁定"
+								onclick="lock(this.id,this.value)" /></td>
+							<td name="operation"><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+							<td><a name="seeUrl" class="zoombox w680 h900"
+								href="admin_class_score.html">[查看/录入]</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couName"></td>
+							<td name="className"></td>
+							<td name="teaAccount"></td>
+							<td name="subSituation"></td>
+							<td><input name="lock" type="submit" value="锁定"
+								onclick="lock(this.id,this.value)" /></td>
+							<td name="operation"><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+							<td><a name="seeUrl" class="zoombox w680 h900"
+								href="admin_class_score.html">[查看/录入]</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couName"></td>
+							<td name="className"></td>
+							<td name="teaAccount"></td>
+							<td name="subSituation"></td>
+							<td><input name="lock" type="submit" value="锁定"
+								onclick="lock(this.id,this.value)" /></td>
+							<td name="operation"><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+							<td><a name="seeUrl" class="zoombox w680 h900"
+								href="admin_class_score.html">[查看/录入]</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couName"></td>
+							<td name="className"></td>
+							<td name="teaAccount"></td>
+							<td name="subSituation"></td>
+							<td><input name="lock" type="submit" value="锁定"
+								onclick="lock(this.id,this.value)" /></td>
+							<td name="operation"><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+							<td><a name="seeUrl" class="zoombox w680 h900"
+								href="admin_class_score.html">[查看/录入]</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couName"></td>
+							<td name="className"></td>
+							<td name="teaAccount"></td>
+							<td name="subSituation"></td>
+							<td><input name="lock" type="submit" value="锁定"
+								onclick="lock(this.id,this.value)" /></td>
+							<td name="operation"><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+							<td><a name="seeUrl" class="zoombox w680 h900"
+								href="admin_class_score.html">[查看/录入]</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couName"></td>
+							<td name="className"></td>
+							<td name="teaAccount"></td>
+							<td name="subSituation"></td>
+							<td><input name="lock" type="submit" value="锁定"
+								onclick="lock(this.id,this.value)" /></td>
+							<td name="operation"><a name="delUrl"
+								href="javascript:void(0);" onclick="deleteClass(this.id)"
+								title="删除"><img src="images/delete.png" alt=""></a></td>
+							<td><a name="seeUrl" class="zoombox w680 h900"
+								href="admin_class_score.html">[查看/录入]</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="pagination" id="page">
+
+					<a href="javascript:void(0);" onclick="lastPage()" class="prev">«</a>
+					<a href="javascript:void(0);" onclick="nowPage(this.id)"
+						id="start1" class="current">1</a> <a
+						href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+						class="next">»</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<script type="text/javascript">
+	var maxPage = 0;
+	var nowPage = 1;
+	function createData(nowPage) {
+		nowPage = nowPage;
+		$.ajax({
+			url : '/NewSys/curriculum/stuYear/info',
+			type : 'GET', //GET
+			timeout : 5000, //超时时间
+			data : "queryPage=" + nowPage + "&stuYear=" + getQueryString("stuYear"),
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success == true) {
+					var stuYearNodes = document.getElementsByName("stuYear");
+					var couNameNodes = document.getElementsByName("couName");
+					var classNameNodes = document.getElementsByName("className");
+					var teaAccountNodes = document.getElementsByName("teaAccount");
+					var subSituationNodes = document.getElementsByName("subSituation");
+					var passRateNodes = document.getElementsByName("passRate");
+					var lockNodes = document.getElementsByName("lock");
+					var seeUrlNodes = document.getElementsByName("seeUrl");
+					var delUrlNodes = document.getElementsByName("delUrl");
+					maxPage = data.data.maxPage;
+					for (var i = 0; i < 10; i++) {
+						if (i < data.data.pageList.length) {
+							stuYearNodes[i].innerHTML = data.data.pageList[i].stuYear;
+							couNameNodes[i].innerHTML = data.data.pageList[i].couName;
+							classNameNodes[i].innerHTML = data.data.pageList[i].className;
+							teaAccountNodes[i].innerHTML = data.data.pageList[i].teaAccount;
+							if (data.data.pageList[i].isSub == true) {
+								if (data.data.pageList[i].isLock == true) {
+									subSituationNodes[i].innerHTML = "已锁定";
+									lockNodes[i].value = "解除锁定";
+								} else {
+									subSituationNodes[i].innerHTML = "已提交";
+									lockNodes[i].value = "锁定";
+								}
+								lockNodes[i].id = i;
+							} else {
+								subSituationNodes[i].innerHTML = "未提交";
+							}
+							seeUrlNodes[i].href = "admin_curriculum_score.html?stuYear=" + data.data.pageList[i].stuYear + "&couName=" + data.data.pageList[i].couName + "&className=" + data.data.pageList[i].className + "&lock=" + data.data.pageList[i].isLock;
+						} else {
+							stuYearNodes[i].innerHTML = "";
+							couNameNodes[i].innerHTML = "";
+							classNameNodes[i].innerHTML = "";
+							teaAccountNodes[i].innerHTML = "";
+							subSituationNodes[i].innerHTML = "";
+							seeUrlNodes[i].href = "admin_curriculum_detailed.html";
+							delUrlNodes[i].id = i;
+							lockNodes.id = i;
+						}
+					}
+					var html = "<a href='javascript:void(0);' onclick='lastPage()' class='prev'>«</a>";
+					for (var i = 1; i <= maxPage; i++) {
+						html += "<a href='javascript:void(0);' onclick='createData(" + i + ")' id='page" + i + "'>" + i + "</a>";
+					}
+					html += "<a href='javascript:void(0);' onclick='nextPage()' class='next'>»</a>";
+					document.getElementById("page").innerHTML = html;
+					document.getElementById("page" + nowPage).className = "current";
+				}
+			}
+		})
+	}
+	createData(nowPage);
+	function lastPage() {
+		if (nowPage <= 1) {
+			alert("没有上一页");
+		} else {
+			nowPage--;
+			createData(nowPage);
+		}
+	}
+	function nextPage() {
+		if (nowPage == maxPage) {
+			alert("没有下一页");
+		} else {
+			nowPage++;
+			createData(nowPage);
+		}
+	}
+	function deleteClass(i) {
+		var className = document.getElementsByName("className")[i].innerHTML;
+		var couName = document.getElementsByName("couName")[i].innerHTML;
+		var teaAccount = document.getElementsByName("teaAccount")[i].innerHTML;
+		var stuYear = getQueryString("stuYear");
+		if (confirm("是否删除" + className + ",课程：" + couName + "?\u000d注意!!!删除课程后与该课程相关信息都将被删除，包括学生成绩信息")) {
+			$.ajax({
+				url : '/NewSys/curriculum/delete',
+				type : 'POST', //GET
+				timeout : 5000, //超时时间
+				data : "className=" + className + "&stuYear=" + stuYear + "&couName=" + couName + "&teaAccount=" + teaAccount,
+				dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+				success : function(data) {
+					if (data.success) {
+						alert("删除成功");
+						createData(nowPage);
+					} else {
+						alert(data.message);
+					}
+				},
+				error : function(data) {
+					alert("删除成功");
+				}
+			})
+		}
+	}
+	function lock(id, value) {
+		var lock;
+		if (value == "解除锁定") {
+			lock = false;
+		} else {
+			lock = true;
+		}
+		var className = document.getElementsByName("className")[id].innerHTML;
+		var couName = document.getElementsByName("couName")[id].innerHTML;
+		var teaAccount = document.getElementsByName("teaAccount")[id].innerHTML;
+		var stuYear = getQueryString("stuYear");
+		$.ajax({
+			url : '/NewSys/curriculum/lock',
+			type : 'POST', //GET
+			timeout : 5000, //超时时间
+			data : "className=" + className + "&stuYear=" + stuYear + "&couName=" + couName + "&teaAccount=" + teaAccount + "&lock=" + lock,
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success) {
+					createData(nowPage);
+				} else {
+					var tip = "锁定失败";
+					ZENG.msgbox.show(tip, 5, 2000);
+				}
+			}
+		})
+	}
+	function lockAll() {
+		$.ajax({
+			url : '/NewSys/curriculum/lock/all',
+			type : 'POST', //GET
+			timeout : 5000, //超时时间
+			data : "stuYear=" + getQueryString("stuYear"),
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success) {
+					createData(nowPage);
+				} else {
+					var tip = "锁定失败";
+					ZENG.msgbox.show(tip, 5, 2000);
+				}
+			}
+		})
+	}
+	function deleteAll() {
+		$.ajax({
+			url : '/NewSys/curriculum/delete/all',
+			type : 'POST', //GET
+			timeout : 5000, //超时时间
+			data : "stuYear=" + getQueryString("stuYear"),
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success) {
+					createData(nowPage);
+				} else {
+					var tip = "删除失败";
+					ZENG.msgbox.show(tip, 5, 2000);
+				}
+			}
+		})
+	}
+	function unLockAll() {
+		$.ajax({
+			url : '/NewSys/curriculum/unLock/all',
+			type : 'POST', //GET
+			timeout : 5000, //超时时间
+			data : "stuYear=" + getQueryString("stuYear"),
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success) {
+					createData(nowPage);
+				} else {
+					var tip = "解除锁定失败";
+					ZENG.msgbox.show(tip, 5, 2000);
+				}
+			}
+		})
+	}
+	function search() {
+		nowPage = nowPage;
+		$.ajax({
+			url : '/NewSys/curriculum/search/like',
+			type : 'GET', //GET
+			timeout : 5000, //超时时间
+			data : "queryPage=" + nowPage + "&stuYear=" + getQueryString("stuYear") + "&search=" + document.getElementById("search").value,
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success == true) {
+					var stuYearNodes = document.getElementsByName("stuYear");
+					var couNameNodes = document.getElementsByName("couName");
+					var classNameNodes = document.getElementsByName("className");
+					var teaAccountNodes = document.getElementsByName("teaAccount");
+					var subSituationNodes = document.getElementsByName("subSituation");
+					var passRateNodes = document.getElementsByName("passRate");
+					var lockNodes = document.getElementsByName("lock");
+					var seeUrlNodes = document.getElementsByName("seeUrl");
+					var delUrlNodes = document.getElementsByName("delUrl");
+					maxPage = data.data.maxPage;
+					for (var i = 0; i < 10; i++) {
+						if (i < data.data.pageList.length) {
+							stuYearNodes[i].innerHTML = data.data.pageList[i].stuYear;
+							couNameNodes[i].innerHTML = data.data.pageList[i].couName;
+							classNameNodes[i].innerHTML = data.data.pageList[i].className;
+							teaAccountNodes[i].innerHTML = data.data.pageList[i].teaAccount;
+							if (data.data.pageList[i].isSub == true) {
+								if (data.data.pageList[i].isLock == true) {
+									subSituationNodes[i].innerHTML = "已锁定";
+									lockNodes[i].value = "解除锁定";
+								} else {
+									subSituationNodes[i].innerHTML = "已提交";
+									lockNodes[i].value = "锁定";
+								}
+								lockNodes[i].id = i;
+							} else {
+								subSituationNodes[i].innerHTML = "未提交";
+							}
+							seeUrlNodes[i].href = "admin_curriculum_score.html?stuYear=" + data.data.pageList[i].stuYear + "&couName=" + data.data.pageList[i].couName + "&className=" + data.data.pageList[i].className + "&lock=" + data.data.pageList[i].isLock;
+						} else {
+							stuYearNodes[i].innerHTML = "";
+							couNameNodes[i].innerHTML = "";
+							classNameNodes[i].innerHTML = "";
+							teaAccountNodes[i].innerHTML = "";
+							subSituationNodes[i].innerHTML = "";
+							seeUrlNodes[i].href = "admin_curriculum_detailed.html";
+							delUrlNodes[i].id = i;
+							lockNodes.id = i;
+						}
+					}
+					var html = "<a href='javascript:void(0);' onclick='lastPage()' class='prev'>«</a>";
+					for (var i = 1; i <= maxPage; i++) {
+						html += "<a href='javascript:void(0);' onclick='createData(" + i + ")' id='page" + i + "'>" + i + "</a>";
+					}
+					html += "<a href='javascript:void(0);' onclick='nextPage()' class='next'>»</a>";
+					document.getElementById("page").innerHTML = html;
+					document.getElementById("page" + nowPage).className = "current";
+				}
+			}
+		})
+	}
+</script>
+<br>

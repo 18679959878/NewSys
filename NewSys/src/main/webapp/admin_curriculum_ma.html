@@ -1,0 +1,183 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-10" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_curriculum_ma.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-10" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/admin_curriculum_ma.html">
+		<h1>
+			<img src="images/posts.png" alt="">课程管理
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="admin_curriculum_ma_edit.html"
+						class="shortcut zoombox w500 h300"> <img
+						src="images/glyph-add.png" alt="" width="48" height="48">
+						添加课程
+					</a>s
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				班级列表 <a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+				<table>
+					<thead>
+						<tr>
+							<th>学年</th>
+							<th>课程数量</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couNums"></td>
+							<td><a name="seeUrl" href="admin_class_detailed.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couNums"></td>
+							<td><a name="seeUrl" href="admin_class_detailed.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couNums"></td>
+							<td><a name="seeUrl" href="admin_class_detailed.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couNums"></td>
+							<td><a name="seeUrl" href="admin_class_detailed.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couNums"></td>
+							<td><a name="seeUrl" href="admin_class_detailed.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couNums"></td>
+							<td><a name="seeUrl" href="admin_class_detailed.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couNums"></td>
+							<td><a name="seeUrl" href="admin_class_detailed.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couNums"></td>
+							<td><a name="seeUrl" href="admin_class_detailed.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couNums"></td>
+							<td><a name="seeUrl" href="admin_class_detailed.html">查看详情</a></td>
+						</tr>
+						<tr>
+							<td name="stuYear"></td>
+							<td name="couNums"></td>
+							<td><a name="seeUrl" href="admin_class_detailed.html">查看详情</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="pagination" id="page">
+					<a href="javascript:void(0);" onclick="lastPage()" class="prev">«</a>
+					<a href="javascript:void(0);" onclick="nowPage(this.id)"
+						id="start1" class="current">1</a> <a
+						href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+						class="next">»</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<script type="text/javascript">
+	var maxPage = 0;
+	var nowPage = 1;
+	function createData(nowPage) {
+		nowPage = nowPage;
+		$.ajax({
+			url : '/NewSys/curriculum/stuYear/infos',
+			type : 'GET', //GET
+			timeout : 5000, //超时时间
+			data : "queryPage=" + nowPage,
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success == true) {
+					var stuYearNodes = document.getElementsByName("stuYear");
+					var couNumsNodes = document.getElementsByName("couNums");
+					var seeUrlNodes = document.getElementsByName("seeUrl");
+					for (var i = 0; i < 10; i++) {
+						if (i < data.data.length) {
+							stuYearNodes[i].innerHTML = data.data[i].stuYear;
+							couNumsNodes[i].innerHTML = data.data[i].stuYearNums;
+							seeUrlNodes[i].href = "admin_curriculum_detailed.html?stuYear=" + data.data[i].stuYear;
+						} else {
+							stuYearNodes[i].innerHTML = "";
+							couNumsNodes[i].innerHTML = "";
+							seeUrlNodes[i].href = "admin_curriculum_detailed.html";
+						}
+					}
+					var html = "<a href='javascript:void(0);' onclick='lastPage()' class='prev'>«</a>";
+					for (var i = 1; i <= maxPage; i++) {
+						html += "<a href='javascript:void(0);' onclick='createData(" + i + ")' id='" + i + "'>" + i + "</a>";
+					}
+					html += "<a href='javascript:void(0);' onclick='nextPage()' class='next'>»</a>";
+					document.getElementById("page").innerHTML = html;
+					document.getElementById(nowPage).className = "current";
+				}
+			}
+		})
+	}
+
+	createData(nowPage);
+	function lastPage() {
+		if (nowPage <= 1) {
+			alert("没有上一页");
+		} else {
+			nowPage--;
+			createData(nowPage);
+		}
+	}
+	function nextPage() {
+		if (nowPage == maxPage) {
+			alert("没有下一页");
+		} else {
+			nowPage++;
+			createData(nowPage);
+		}
+	}
+</script>
+<br>

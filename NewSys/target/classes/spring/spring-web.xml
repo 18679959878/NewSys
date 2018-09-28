@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<!-- 配置SpringMVC -->
+	<!-- 1.开启SpringMVC注解模式 -->
+	<!-- 简化配置： (1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter 
+		(2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持 -->
+	<mvc:annotation-driven>
+
+		<!-- 消息转换器 -->
+
+		<mvc:message-converters register-defaults="true">
+
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<!-- 使用utf8编码，全局有效 -->
+				<property name="supportedMediaTypes" value="text/html;charset=UTF-8" />
+
+			</bean>
+
+		</mvc:message-converters>
+
+	</mvc:annotation-driven>
+
+
+	<!-- 2.静态资源默认servlet配置 (1)加入对静态资源的处理：js,gif,png (2)允许使用"/"做整体映射 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 3.配置html 显示ViewResolver -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/html/" />
+		<property name="suffix" value=".html" />
+	</bean>
+
+	<mvc:annotation-driven>
+		<!--不使用默认消息转换器 -->
+		<mvc:message-converters register-defaults="false">
+			<!--spring消息转换器 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter" />
+			<bean
+				class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+			<bean
+				class="org.springframework.http.converter.BufferedImageHttpMessageConverter" />
+
+			<!--解决@Responcebody中文乱码问题 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8"></constructor-arg>
+			</bean>
+			<!--配合fastjson支持 -->
+			<bean
+				class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="defaultCharset" value="UTF-8"></property>
+				<property name="supportedMediaTypes">
+					<list>
+						<!--顺序保持这样,避免IE下载出错 -->
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json</value>
+					</list>
+				</property>
+				<property name="features">
+					<array>
+						<!-- 下面配置，默认是false -->
+						<value>WriteMapNullValue</value>
+						<value>WriteNullNumberAsZero</value>
+						<value>WriteNullListAsEmpty</value>
+						<value>WriteNullStringAsEmpty</value>
+						<value>WriteNullBooleanAsFalse</value>
+						<value>WriteDateUseDateFormat</value>
+					</array>
+				</property>
+			</bean>
+		</mvc:message-converters>
+
+
+	</mvc:annotation-driven>
+	<!-- ====================== 配置自定义的MutilpartResover解析器处理文件上传进度条 ====================== -->
+	<bean id="multipartResolver" class="com.sys.web.CustomMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<property name="maxUploadSize" value="1024000000"></property>
+	</bean>
+
+
+	<!-- 权限验证aop -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<!-- <property name="defaultErrorView" value="rediret:/error"></property> -->
+		<property name="exceptionMappings">
+			<props>
+				<!--对抛出此类型异常进行处理 -->
+				<prop key="LandJurisdictionException">forward:/lje</prop>
+				<prop key="DateJurisdictionException">forward:/dje</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="aspectPermission" class="com.sys.aspect.FinalProjectTitelAspect" />
+	<!-- 对带有@ValidatePermission和ResponseBody注解的controller包及其子包所有方法执行功能权限校验 -->
+	<aop:config proxy-target-class="true">
+		<aop:aspect ref="aspectPermission">
+			<aop:pointcut id="pc"
+				expression="@annotation(com.sys.annotation.FPValidatePermission) 
+                and @annotation(org.springframework.web.bind.annotation.ResponseBody) 
+                and execution(* com.sys.web..*.*(..)) " />
+			 <aop:before pointcut-ref="pc" method="doBefore"/>
+		</aop:aspect>
+	</aop:config>
+
+
+	<!-- 4.扫 描web相关的bean -->
+	<context:component-scan base-package="com.sys.web" />
+	<context:component-scan base-package="com.sys.utils" />
+</beans>

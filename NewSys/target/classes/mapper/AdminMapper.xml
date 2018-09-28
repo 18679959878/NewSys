@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.AdminMapper">
+	<resultMap type="com.sys.entity.Admin" id="AdminResult">
+		<id column="account" jdbcType="VARCHAR" property="account"></id>
+		<result column="password" jdbcType="VARCHAR" property="password"></result>
+		<result column="email" jdbcType="VARCHAR" property="email"></result>
+	</resultMap>
+	<insert id="save" parameterType="com.sys.entity.Admin">
+		INSERT INTO
+		admin(account,password)
+		VALUES(#{account},#{password});
+	</insert>
+	<select id="select" parameterType="String" resultMap="AdminResult">
+		SELECT
+		account,password,email FROM
+		admin WHERE account=#{account}
+	</select>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.WeekRecordMapper">
+	<resultMap type="com.sys.entity.WeekRecord" id="WeekRecordResult">
+		<id column="stuId" jdbcType="VARCHAR" property="stuId"></id>
+		<id column="stageName" jdbcType="VARCHAR" property="stageName"></id>
+		<result column="department" jdbcType="VARCHAR" property="department"></result>
+		<result column="place" jdbcType="VARCHAR" property="place"></result>
+		<result column="activity" jdbcType="VARCHAR" property="activity"></result>
+		<result column="guidance" jdbcType="VARCHAR" property="guidance"></result>
+		<result column="isLock" jdbcType="BOOLEAN" property="isLock" />
+		<result column="score" jdbcType="INTEGER" property="score" />
+	</resultMap>
+	<select id="select" parameterType="String" resultMap="WeekRecordResult">
+		SELECT
+		stuId,stageName,department,place,activity,guidance,isLock,score
+		FROM
+		weekRecord WHERE stuId=#{stuId} AND stageName=#{stageName}
+	</select>
+	<insert id="saveOrUpdate" parameterType="com.sys.entity.WeekRecord">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			SELECT COUNT(*) FROM weekRecord WHERE stuId = #{stuId}
+		</selectKey>
+		<if test="count > 0">
+			UPDATE weekRecord
+			SET
+			department=#{department},place=#{place},activity=#{activity},guidance=#{guidance},isLock=#{isLock},score=#{score}
+			WHERE stuId = #{stuId} AND stageName=#{stageName};
+		</if>
+		<if test="count==0">
+			insert into
+			weekRecord(stuId,stageName,department,place,activity,guidance,isLock,score)
+			values(#{stuId},#{stageName},#{department},#{place},#{activity},#{guidance},#{isLock},#{score})
+		</if>
+	</insert>
+</mapper>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>后台管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+
+<style type="text/css">
+body {
+	padding: 0;
+	margin: 0;
+	overflow-y: hidden;
+}
+
+.main {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+}
+
+.top {
+	width: 100%;
+	height: 42px;
+	position: absolute;
+	top: 0;
+	z-index: 102;
+}
+
+.bottom {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	z-index: 101;
+}
+
+.left {
+	width: 14.4%;
+	height: 100%;
+	clear: both;
+	float: left;
+	position: absolute;
+	top: 0;
+}
+
+.right {
+	width: 100%;
+	height: 100%;
+}
+</style>
+
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-83" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/teacher.html">
+	<!--<div>
+	<div style="width:100%; height:50px; background-color:#FF0000;"></div>
+	<div style="width:20%; height:80px; background-color:#333;"></div>
+	<div style="height:500px;"></div>
+</div>-->
+	<div class="main" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-83" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/teacher.html">
+		<div class="top">
+			<iframe name="top" width="100%" height="100%" src="teacher_top.html"></iframe>
+		</div>
+		<div class="bottom">
+			<div class="left">
+				<iframe name="left" width="100%" height="100%"
+					src="teacher_left.html" scrolling="no"></iframe>
+			</div>
+			<div class="right">
+				<iframe name="right" width="100%" height="100%"
+					src="teacher_welcome.html"></iframe>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

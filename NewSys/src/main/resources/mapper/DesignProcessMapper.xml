@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.DesignProcessMapper">
+	<resultMap type="com.sys.entity.DesignProcess" id="DesignProcessResult">
+		<id column="stageName" jdbcType="VARCHAR" property="stageName"></id>
+		<id column="stuId" jdbcType="VARCHAR" property="stuId" />
+		<result column="sketch" jdbcType="VARCHAR" property="sketch"></result>
+		<result column="amendOpinion" jdbcType="VARCHAR" property="amendOpinion"></result>
+		<result column="guidance" jdbcType="VARCHAR" property="guidance" />
+		<result column="score" jdbcType="INTEGER" property="score" />
+		<result column="isLock" jdbcType="BOOLEAN" property="isLock" />
+	</resultMap>
+	<select id="select" resultMap="DesignProcessResult">
+		SELECT
+		stageName,stuId,sketch,amendOpinion,guidance,score,isLock
+		FROM designProcess
+		WHERE stuId=#{stuId} AND stageName=#{stageName}
+	</select>
+	<insert id="saveOrUpdate" parameterType="com.sys.entity.DesignProcess">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			SELECT COUNT(*) FROM designProcess WHERE stuId = #{stuId} AND
+			stageName=#{stageName}
+		</selectKey>
+		<if test="count > 0">
+			UPDATE designProcess
+			SET sketch =
+			#{sketch},amendOpinion =
+			#{amendOpinion},guidance =
+			#{guidance},score=#{score},isLock=#{isLock}
+			WHERE stuId = #{stuId} AND
+			stageName = #{stageName}
+		</if>
+		<if test="count==0">
+			INSERT INTO
+			designProcess(stuId,stageName,sketch,amendOpinion,guidance,score,isLock)
+			VALUES(#{stuId},#{stageName},#{sketch},#{amendOpinion},#{guidance},#{score},#{isLock})
+		</if>
+
+	</insert>
+</mapper>

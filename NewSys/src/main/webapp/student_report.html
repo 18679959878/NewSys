@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+<link rel="stylesheet" href="css/tip.css" />
+<link rel="stylesheet" href="css/sumbitButton.css">
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/msgbox.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-76" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_report.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-76" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_report.html">
+		<h1>
+			<img src="images/posts.png" alt="">
+			<code class="stageName"></code>
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="student_report_ma.html" class="shortcut" id="back"> <img
+						src="images/callback.png" alt="" width="48" height="48">
+						返回上一页
+					</a> <a href="student_report.html" id="refurbish" class="shortcut">
+						<img src="images/refurbish.png" alt="" width="48" height="48">
+						刷新页面
+					</a>
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				<code class="stageName"> </code>
+				<a href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+				<div style="height: 30px;">
+					<h5>说明文（填写）</h5>
+				</div>
+				<div id="reportText" class="editor">
+					<h5 id="sh"></h5>
+				</div>
+				<div style="height: 40px;">
+					<p style="margin-left: 72%; font-size: 16px;">
+						<span id="message" style="color: red;"></span>
+					</p>
+				</div>
+				<div style="height: 30px;">
+					<h5>指导意见</h5>
+				</div>
+				<div id="guidance" class="editor"></div>
+				<form action="/NewSys/report/sop" id="add" method="post">
+					<textarea id="reportText_t" name="reportText" hidden="hidden"></textarea>
+					<textarea id="guidance_t" name="guidance" hidden="hidden"></textarea>
+					<input type="text" name="stageName" id="stageName_t"
+						hidden="hidden" />
+				</form>
+				<button id="but" onclick="tip()">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<script type="text/javascript">
+	//document.getElementById("stageName").innerHTML ="设计过程"+getQueryString("stageName").substring(0, 2);
+	$(".stageName").html("说明文" + getQueryString("stageName").substring(getQueryString("stageName").length - 2, getQueryString("stageName").length));
+
+	document.getElementById("refurbish").href = "student_report.html?stageName=" + getQueryString("stageName");
+</script>
+<script type="text/javascript">
+	var editors = new Array();
+	var isLock = false;
+	function tip() {
+		if (isLock == false) {
+			$("#reportText_t").val(editors[0].txt.html());
+			$("#guidance_t").val(editors[1].txt.html());
+			$("#stageName_t").val(getQueryString("stageName"));
+			var targetUrl = $("#add").attr("action");
+			var sendData = $("#add").serialize();
+			$.ajax({
+				url : targetUrl,
+				type : 'POST', //POST
+				timeout : 5000, //超时时间
+				data : sendData,
+				dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+				success : function(data) {
+					if (data.success == true) {
+						var tip = "内容已保存";
+						ZENG.msgbox.show(tip, 4, 2000);
+					} else {
+						var tip = data.error;
+						ZENG.msgbox.show(tip, 5, 2000);
+					}
+				},
+				error : function(data) {
+					var tip = "内容保存失败";
+					ZENG.msgbox.show(tip, 5, 2000);
+				}
+			});
+		} else {
+			var tip = "内容被锁定，无法保存";
+			ZENG.msgbox.show(tip, 5, 2000);
+		}
+	}
+</script>
+<script type="text/javascript">
+	var E = window.wangEditor;
+	var editors = new Array();
+	var nums = 0;
+	var isLock = false;
+	editors[0] = new E("#reportText");
+	editors[1] = new E("#guidance");
+	for (var i = 0; i < editors.length; i++) {
+
+		editors[i].customConfig.menus = [
+			'head', // 标题
+			'fontSize',
+			'list',
+			'justify',
+			'undo',
+			'redo',
+			'bold', // 粗体
+			'code' // 插入代码
+		];
+		if (i == 0) {
+			editors[i].customConfig.onchange = function(html) {
+				var length = removeHTMLTag(html).length;
+				$("#message").html("当前字数：" + length + "....最低字数限制:1500");
+				if (length < 1500) {
+					$("#message").css("color", "red");
+				} else {
+					$("#message").css("color", "green");
+				}
+				if ((length - nums >= 20) || (length - nums <= -20)) {
+					nums = length;
+					tip();
+				}
+			}
+		}
+
+		editors[i].create();
+		if (i != 0) {
+			editors[i].$textElem.attr('contenteditable', false);
+		}
+	}
+	if (getQueryString("stageName") == "说明一稿") {
+		editors[1].txt.html("<p>说明文一稿指导意见：</p<p>1、</p><br> <br><p>2、</p><br> <br><p>3、</p><br> <br<p>4、</p>");
+	} else if (getQueryString("stageName") == "说明文二稿") {
+		editors[1].txt.html("<p>说明文二稿指导意见：</p<p>1、</p><br> <br><p>2、</p>");
+	} else {
+		editors[1].txt.html("<p>说明文定稿指导意见：</p<p>1、</p><br> <br><p>2、</p>");
+	}
+
+	function createData(editors) {
+		$.ajax({
+			url : "/NewSys/report/sel",
+			type : 'GET',
+			timeout : 5000, //超时时间
+			data : "stageName=" + getQueryString("stageName"),
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success) {
+					editors[0].txt.html(data.data.reportText);
+					editors[1].txt.html(data.data.guidance);
+					isLock = data.data.isLock;
+					if (data.data.isLcock == true) {
+						$("#but").css("background", "#C0C0C0");
+						$("#but").html("已&nbsp;&nbsp;锁&nbsp;&nbsp;&nbsp;定");
+					} else {
+						$("#but").css("background", "");
+						$("#but").html("提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交");
+					}
+				}
+			}
+		});
+	}
+	function removeHTMLTag(str) {
+		str = str.replace(/<\/?[^>]*>/g, ''); //去除HTML tag
+		str = str.replace(/[ | ]*\n/g, '\n'); //去除行尾空白
+		str = str.replace(/&nbsp;/ig, ''); //去掉&nbsp;
+		return str;
+	}
+	createData(editors);
+</script>
+<br>
+</html>

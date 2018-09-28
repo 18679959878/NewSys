@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+v
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/jquery.wysiwyg.old-school.css">
+<link rel="stylesheet" href="css/tip.css" />
+<link rel="stylesheet" href="css/sumbitButton.css">
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/msgbox.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/style2.css">
+<script type="text/javascript" src="js/wangEditor.min.js"></script>
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-66" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_filed_promis.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-66" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_filed_promis.html">
+		<h1>
+			<img src="images/posts.png" alt="">班级管理
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				班级列表 <a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+				<form method="post" action="/NewSys/situation/sop" id="add">
+					<div style="height: 40px;">
+						<h2>出勤情况</h2>
+					</div>
+					<div id="at_promis">
+						<table>
+							<tr>
+								<td>全勤：是<input type="radio" name="fullWork" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;否<input
+									type="radio" name="fullWork" onclick="radio()" value="否" />
+								</td>
+								<td>事假：<input type="text" class="top" id="absenceLeave"
+									name="absenceLeave" />（单位：次）
+								</td>
+								<td>病假：<input type="text" class="top" id="sickLeave" name="sickLeave" />（单位：次）
+								</td>
+							</tr>
+							<tr>
+								<td>迟到：<input type="text" class="top" id="late" name="late" />（单位：次）
+								</td>
+								<td>早退：<input type="text" class="top" id="leaveEarly" name="leaveEarly" />（单位：次）
+								</td>
+								<td>缺席：<input type="text" class="top" id="absent" name="absent" />（单位：次）
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div style="height: 50px;">
+						<h2>工作情况</h2>
+					</div>
+					<div id="workSituation">
+						<p>工作情况</p>
+					</div>
+					<div style="height: 40px;">
+						<p style="margin-left: 72%; font-size: 16px;">
+							字数限制400-600&nbsp;&nbsp;&nbsp;<span id="other_error"
+								style="color: red;"></span>
+						</p>
+					</div>
+					<textarea id="workSituation_t" name="workSituation" hidden="hidden"></textarea>
+				</form>
+				<div id="b_div" style="height: 65px;">
+					<button onclick="tip()">提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+
+<script type="text/javascript">
+	var lastOtherNum = 0;
+	var E = window.wangEditor
+	var work_promis = new E('#workSituation')
+	work_promis.customConfig.onchange = function(html) {
+		var length = removeHTMLTag(html).length;
+		if (length > 600) {
+			$("#other_error").css("color", "red");
+			$("#other_error").html(length + "/600(超出字数限制)");
+		} else if (length < 400) {
+			$("#other_error").css("color", "red");
+			$("#other_error").html(length + "/400(字数不足)");
+		} else {
+			$("#other_error").css("color", "green");
+			$("#other_error").html(length + "/400(字数限制内)");
+		}
+		if (length <= 340 && (length - lastOtherNum >= 20) || (length - lastOtherNum <= -20)) {
+			lastOtherNum = length;
+			tip();
+		}
+	}
+	work_promis.customConfig.menus = [
+		'fontSize',
+		'list',
+		'justify',
+		'undo',
+		'redo',
+	]
+
+	work_promis.create();
+	function removeHTMLTag(str) {
+		str = str.replace(/<\/?[^>]*>/g, ''); //去除HTML tag
+		str = str.replace(/[ | ]*\n/g, '\n'); //去除行尾空白
+		str = str.replace(/&nbsp;/ig, ''); //去掉&nbsp;
+		return str;
+	}
+	function tip() {
+		$("#workSituation_t").val(work_promis.txt.html());
+		var targetUrl = $("#add").attr("action");
+		var sendData = $("#add").serialize();
+		if (removeHTMLTag(work_promis.txt.html()).length < 600) {
+			$.ajax({
+				url : targetUrl,
+				type : 'POST', //POST
+				timeout : 5000, //超时时间
+				data : sendData,
+				dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+				success : function(data) {
+					if (data.success == true) {
+						var tip = "内容已保存";
+						ZENG.msgbox.show(tip, 4, 2000);
+						createData();
+					} else {
+						var tip = data.error;
+						ZENG.msgbox.show(tip, 5, 2000);
+					}
+				},
+				error : function(data) {
+					var tip = "内容保存失败";
+					ZENG.msgbox.show(tip, 5, 2000);
+				}
+			});
+		} else {
+			var tip = "字数超过600字限制,内容保存失败";
+			ZENG.msgbox.show(tip, 5, 2000);
+		}
+	}
+
+	function createData() {
+		$.ajax({
+			url : "/NewSys/situation/sel",
+			type : 'GET',
+			timeout : 5000, //超时时间
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				if (data.success) {
+					work_promis.txt.html(data.data.workSituation);
+					$("#fullWork").val(data.data.fullWork);
+					$("#absenceLeave").val(data.data.absenceLeave);
+					$("#sickLeave").val(data.data.sickLeave);
+					$("#late").val(data.data.late);
+					$("#leaveEarly").val(data.data.leaveEarly);
+					$("#absent").val(data.data.absent);
+				}
+			}
+		});
+
+	}
+	createData();
+</script>
+
+<br>
+</html>
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.ReportMapper">
+	<resultMap type="com.sys.entity.Report" id="ReportResult">
+		<id column="stageName" jdbcType="VARCHAR" property="stageName"></id>
+		<id column="stuId" jdbcType="VARCHAR" property="stuId" />
+		<result column="reportText" jdbcType="VARCHAR" property="reportText"></result>
+		<result column="guidance" jdbcType="VARCHAR" property="guidance" />
+		<result column="score" jdbcType="INTEGER" property="score" />
+		<result column="isLock" jdbcType="BOOLEAN" property="isLock" />
+	</resultMap>
+	<select id="select" resultMap="ReportResult">
+		SELECT
+		stageName,stuId,reportText,guidance,score,isLock
+		FROM report
+		WHERE stuId=#{stuId} AND stageName=#{stageName}
+	</select>
+	<insert id="saveOrUpdate" parameterType="com.sys.entity.Report">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			SELECT COUNT(*) FROM report WHERE stuId = #{stuId} AND
+			stageName=#{stageName}
+		</selectKey>
+		<if test="count > 0">
+			UPDATE report
+			SET reportText=#{reportText},guidance =
+			#{guidance},score=#{score},isLock=#{isLock}
+			WHERE stuId = #{stuId} AND
+			stageName = #{stageName}
+		</if>
+		<if test="count==0">
+			INSERT INTO
+			report(stuId,stageName,reportText,guidance,score,isLock)
+			VALUES(#{stuId},#{stageName},#{reportText},#{guidance},#{score},#{isLock})
+		</if>
+
+	</insert>
+</mapper>

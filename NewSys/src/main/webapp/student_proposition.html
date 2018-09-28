@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>软件动漫学院准毕业生毕业设计与实习管理系统</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/sumbitButton.css">
+
+<!-- jQuery AND jQueryUI -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/min.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/admin_class_ma.js"></script>
+<script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="js/url.js"></script>
+<link rel="stylesheet" href="css/input.css">
+<script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"54645",secure:"54650"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
+<body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-75" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_proposition.html">
+
+	<!--     内容      -->
+	<div id="content" class="white" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-75" data-genuitec-path="/NewSys Maven Webapp/src/main/webapp/student_proposition.html">
+		<h1>
+			<img src="images/posts.png" alt="">论文标题
+		</h1>
+
+		<!--操作栏-->
+		<div class="bloc">
+			<div class="title">
+				操作 <a class="toggle"></a>
+			</div>
+			<div class="content dashboard">
+				<div class="center" style="display: block; width: auto;">
+					<a href="student_proposition.html" class="shortcut"> <img
+						src="images/refurbish.png" alt="" width="48" height="48">
+						刷新页面
+					</a>
+					<div class="cb"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="bloc">
+			<div class="title">
+				论文标题 <a
+					href="http://www.grafikart.fr/demo/coreadmin/index.php?p=table#"
+					class="toggle"></a>
+			</div>
+			<div class="content">
+				<div class="sec_error_box"></div>
+				<br> <br>
+				<div class="main-container page__container">
+					<form action="/NewSys/fpt/sop" method="post" class="addFpt">
+						<div class="page__section">
+							<label class="field field_type3">题目（中文） <input
+								class="field__input" id="titel_cn" name="titel_cn"
+								placeholder="题目（中文）"> <span class="field__label">输入题目（中文）</span>
+								<span class="field__line"></span>
+							</label> <br> <br> <label class="field field_type3">题目（英文）
+								<input class="field__input" id="titel_en" name="titel_en"
+								placeholder="题目（中文）"> <span class="field__label">输入题目（英文）</span>
+								<span class="field__line"></span>
+							</label><br> <br> <label class="field field_type3">学院 <input
+								class="field__input" id="academy" name="academy"
+								placeholder="学院"> <span class="field__label">学院</span> <span
+								class="field__line"></span>
+							</label><br> <br> <label class="field field_type3">指导教师姓名及职称
+								<input class="field__input" id="teaNameAndTitel"
+								name="teaNameAndTitel" placeholder="指导教师姓名及职称"> <span
+								class="field__label">指导教师姓名及职称</span> <span class="field__line"></span>
+							</label><br> <br>
+						</div>
+						<div id="b_div" style="height: 65px;">
+							<button>提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<br>
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+</body>
+<script type="text/javascript">
+	$(".addFpt").Validform({
+		tiptype : function(msg, o, cssctl) {
+			var objtip = $(".sec_error_box");
+			cssctl(objtip, o.type);
+			objtip.text(msg);
+		},
+		ajaxPost : true,
+		beforeSubmit : function(curform) {
+			return true;
+		},
+		callback : function(data) {
+			if (data.success == true) {
+				var objtip = $(".sec_error_box");
+				objtip.text("添加成功");
+			//			window.location.href = "/GraduateSystem/admin.html"
+			} else {
+				var objtip = $(".sec_error_box");
+				objtip.text(data.error);
+			}
+		}
+	});
+	//alert("测试");
+	function createData() {
+		$.ajax({
+			url : '/NewSys/fpt/sel',
+			type : 'GET', //GET
+			timeout : 5000, //超时时间
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			success : function(data) {
+				document.getElementById("academy").value = data.data.academy;
+				document.getElementById("titel_cn").value = data.data.titelCn;
+				document.getElementById("titel_en").value = data.data.titelEn;
+				document.getElementById("teaNameAndTitel").value = data.data.teaNameAndTitel;
+	
+			//alert("测试");
+			}
+		});
+	}
+	createData();
+</script>
+</html>

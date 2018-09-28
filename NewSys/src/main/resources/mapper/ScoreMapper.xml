@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.dao.ScoreMapper">
+	<resultMap type="com.sys.entity.Score" id="ScoreResult">
+		<id column="stuId" jdbcType="VARCHAR" property="stuId"></id>
+		<id column="couName" jdbcType="VARCHAR" property="couName"></id>
+		<id column="stuYear" jdbcType="VARCHAR" property="stuYear"></id>
+		<result column="score" jdbcType="VARCHAR" property="score" />
+	</resultMap>
+	<select id="select" resultMap="ScoreResult">
+		SELECT stuId,couName,stuYear,score
+		FROM score WHERE stuYear=#{stuYear} AND couName=#{couName} AND stuId IN
+		(SELECT stuId
+		FROM student WHERE className=#{className})
+	</select>
+	<insert id="saveOrUpdate" parameterType="com.sys.entity.Score">
+		<selectKey keyProperty="count" resultType="int" order="BEFORE">
+			SELECT COUNT(*) FROM score WHERE stuId = #{stuId} AND
+			couName=#{couName} AND stuYear=#{stuYear}
+		</selectKey>
+		<if test="count > 0">
+			UPDATE score
+			SET score = #{score}
+			WHERE stuId =
+			#{stuId} AND couName=#{couName} AND stuYear=#{stuYear}
+		</if>
+		<if test="count==0">
+			INSERT INTO
+			score(stuId,couName,stuYear,score)
+			VALUES(#{stuId},#{couName},#{stuYear},#{score})
+		</if>
+
+	</insert>
+</mapper>
